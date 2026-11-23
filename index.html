@@ -1,0 +1,2975 @@
+<!DOCTYPE html>
+<html lang="fr" class="anti-cadre">
+<head>
+<meta charset="utf-8">
+<!-- Sécurité : règle de sécurité du contenu (CSP). Le script de la page est autorisé par son empreinte SHA-256. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-e7s9U1SSfw/sMWyTKieY2hKnMwO4knYUODFgBXeRkAg=' https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js https://cdnjs.cloudflare.com/ajax/libs/echarts/5.6.0/echarts.min.js; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Tableau de bord TFT IAS 7 · ATLAS DISTRIBUTION SA (entreprise fictive) · 2027 face à 2026">
+<title>ATLAS DISTRIBUTION SA · Situation TFT 2027</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23000'/%3E%3Cpath d='M32 12 50 52H42L38 43H26L22 52H14Z M29 36H35L32 28Z' fill='%23E0AE28'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400&amp;family=Inter:wght@300;400;600&amp;display=swap">
+<style>
+/* =====================================================================
+   DESIGN SYSTEM · écrit une seule fois, réutilisé partout
+   Noir « liquid UI » · palette : fond #000000 · cartes #050505 ·
+   texte #E0AE28 · principale #FFFFFF · accent #E0AE28
+   ===================================================================== */
+:root{
+  /* Couleurs */
+  --c-fond:#000000;
+  --c-carte:#050505;
+  --c-texte:#E0AE28;
+  --c-texte-doux:#C39A2E;
+  --c-principale:#FFFFFF;
+  --c-principale-doux:rgba(255,255,255,.78);
+  --c-accent:#E0AE28;
+  --c-entree:#E0AE28;          /* flowcharts : entrées en or */
+  --c-sortie:#A3263B;          /* flowcharts : sorties en grenat lumineux */
+  --c-total:#FFFFFF;           /* flowcharts : totaux en blanc */
+  --c-vert:#5FD39A;            /* signaux sobres, toujours avec icône et mot */
+  --c-orange:#F2A93B;
+  --c-rouge:#FF6B7A;
+  --c-bleu:#7DB9FF;
+  --c-gris:#A8A8A8;
+  --verre:rgba(5,5,5,.66);
+  --verre-fort:rgba(5,5,5,.86);
+  --bord:rgba(255,255,255,.10);
+  --bord-fort:rgba(255,255,255,.18);
+  --reflet:rgba(255,255,255,.06);
+  /* Polices */
+  --f-titre:"Cinzel", "Trajan Pro", Georgia, serif;
+  --f-texte:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  /* Échelle typographique fixe */
+  --t-titre:40px;
+  --t-sous-titre:24px;
+  --t-chiffre:clamp(56px, 7vw, 104px);
+  --t-texte:16px;
+  --t-legende:13px;
+  /* Espacements · échelle de 8 px */
+  --e-1:8px; --e-2:16px; --e-3:24px; --e-4:32px; --e-5:40px; --e-6:48px; --e-8:64px; --e-10:80px;
+  /* Rayons */
+  --r-1:8px; --r-2:16px; --r-3:24px; --r-rond:999px;
+  /* Ombres */
+  --o-1:0 8px 24px rgba(0,0,0,.55);
+  --o-2:0 24px 64px rgba(0,0,0,.85), inset 0 1px 0 rgba(255,255,255,.07);
+  --o-lueur:0 0 0 1px rgba(224,174,40,.55), 0 0 32px rgba(224,174,40,.35);
+  /* Mise en page */
+  --rail:72px;
+  --menu:312px;
+  --bande:56px;
+  --onglets:72px;
+  --duree:200ms;
+  --courbe:cubic-bezier(.2,.8,.2,1);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html.anti-cadre body{visibility:hidden}
+html{background:var(--c-fond);-webkit-text-size-adjust:100%}
+body{
+  margin:0;min-height:100vh;background:var(--c-fond);color:var(--c-texte);
+  font-family:var(--f-texte);font-weight:300;font-size:var(--t-texte);line-height:1.55;
+  overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{font-family:var(--f-titre);font-weight:400;color:var(--c-principale);margin:0;letter-spacing:.02em}
+h1{font-size:var(--t-titre);line-height:1.15}
+h2{font-size:var(--t-sous-titre);line-height:1.25}
+h3{font-size:18px;line-height:1.3}
+p{margin:0}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--c-principale);outline-offset:3px;border-radius:var(--r-1)}
+.lecteur-seul{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.chiffre{font-family:var(--f-titre);font-weight:400;font-variant-numeric:tabular-nums lining-nums;color:var(--c-principale)}
+.unite{font-family:var(--f-titre);color:var(--c-accent)}
+.legende{font-size:var(--t-legende);color:var(--c-texte-doux)}
+
+/* ---------- Fond animé : noir laqué, reflets lents ---------- */
+#fond{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#000}
+#fond .reflet{position:absolute;width:90vmax;height:90vmax;border-radius:50%;filter:blur(10px);opacity:1;will-change:transform}
+#fond .r1{left:-30vmax;top:-35vmax;background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.075), rgba(255,255,255,.02) 30%, rgba(0,0,0,0) 62%);animation:glisse1 26s ease-in-out infinite alternate}
+#fond .r2{right:-35vmax;bottom:-40vmax;background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.06), rgba(255,255,255,.015) 34%, rgba(0,0,0,0) 64%);animation:glisse2 30s ease-in-out infinite alternate}
+#fond .r3{left:20vw;top:30vh;width:60vmax;height:60vmax;background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.035), rgba(0,0,0,0) 60%);animation:glisse3 22s ease-in-out infinite alternate}
+#fond::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.035) 50%, rgba(255,255,255,0) 65%);background-size:300% 300%;animation:lustre 28s linear infinite}
+#particules{position:fixed;inset:0;z-index:0;pointer-events:none;width:100vw;height:100vh}
+@keyframes glisse1{from{transform:translate3d(0,0,0)}to{transform:translate3d(18vw,12vh,0)}}
+@keyframes glisse2{from{transform:translate3d(0,0,0)}to{transform:translate3d(-16vw,-10vh,0)}}
+@keyframes glisse3{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-12vw,8vh,0) scale(1.15)}}
+@keyframes lustre{from{background-position:0% 0%}to{background-position:300% 300%}}
+
+/* ---------- Verre noir laqué ---------- */
+.verre{
+  position:relative;background:linear-gradient(180deg, var(--reflet), rgba(255,255,255,0) 42%), var(--verre);
+  border:1px solid var(--bord);border-radius:var(--r-3);box-shadow:var(--o-2);
+  -webkit-backdrop-filter:blur(18px) saturate(150%);backdrop-filter:blur(18px) saturate(150%);
+}
+.verre::before{content:"";position:absolute;left:12%;right:12%;top:0;height:1px;background:linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,.35), rgba(255,255,255,0));pointer-events:none}
+
+/* ---------- Menu latéral (ordinateur) ---------- */
+.menu{
+  position:fixed;inset:0 auto 0 0;width:var(--rail);z-index:40;display:flex;flex-direction:column;
+  background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,0) 30%), rgba(2,2,2,.78);
+  border-right:1px solid var(--bord);overflow:hidden;
+  -webkit-backdrop-filter:blur(24px) saturate(150%);backdrop-filter:blur(24px) saturate(150%);
+  transition:width var(--duree) var(--courbe), box-shadow var(--duree) var(--courbe);
+}
+.menu:hover,.menu:focus-within{width:var(--menu);box-shadow:24px 0 64px rgba(0,0,0,.8)}
+.menu .marque{display:flex;align-items:center;gap:var(--e-2);padding:var(--e-3) 16px var(--e-2);min-height:88px}
+.monogramme{flex:0 0 40px;height:40px;border-radius:12px;display:grid;place-items:center;font-family:var(--f-titre);font-size:20px;color:#000;background:linear-gradient(160deg,#F3CD5E,#E0AE28 45%,#9C7413);box-shadow:0 0 24px rgba(224,174,40,.25)}
+.marque .txt b{display:block;font-family:var(--f-titre);font-weight:400;color:var(--c-principale);font-size:15px;letter-spacing:.06em}
+.marque .txt span{font-size:12px;color:var(--c-texte-doux)}
+.txt{white-space:nowrap;opacity:0;transition:opacity var(--duree) var(--courbe)}
+.menu:hover .txt,.menu:focus-within .txt{opacity:1}
+.nav{flex:0 1 auto;overflow-y:auto;overflow-x:hidden;padding:0 12px var(--e-1);scrollbar-width:thin}
+.nav ul{list-style:none;margin:0;padding:0}
+.lien-nav{display:flex;align-items:center;gap:14px;min-height:44px;padding:8px 12px;border-radius:14px;text-decoration:none;color:var(--c-texte);cursor:pointer;border:1px solid transparent;transition:background var(--duree),border-color var(--duree)}
+.lien-nav:hover{background:rgba(255,255,255,.05)}
+.lien-nav[aria-current="page"]{background:rgba(255,255,255,.07);border-color:var(--bord);color:var(--c-principale)}
+.lien-nav svg{flex:0 0 22px;width:22px;height:22px}
+.lien-nav .txt{flex:1;overflow:hidden;text-overflow:ellipsis}
+.famille-ligne{display:flex;align-items:center;gap:2px}
+.famille-ligne .lien-nav{flex:1;min-width:0;padding-left:6px}
+.bouton-deplier{flex:0 0 32px;height:32px;border:0;background:transparent;border-radius:10px;cursor:pointer;display:grid;place-items:center;color:var(--c-texte)}
+.bouton-deplier:hover{background:rgba(255,255,255,.06)}
+.bouton-deplier svg{width:16px;height:16px;transition:transform var(--duree) var(--courbe)}
+.bouton-deplier[aria-expanded="true"] svg{transform:rotate(90deg)}
+.nav-familles{margin:2px 0 6px 10px;padding-left:6px;border-left:1px solid var(--bord)}
+.nav-kpis{margin:0 0 4px 38px}
+.nav-kpis .lien-nav{min-height:36px;padding:6px 10px;font-size:14px}
+.code-kpi{font-family:var(--f-titre);color:var(--c-accent);font-size:12px;margin-right:6px}
+.menu:not(:hover):not(:focus-within) .nav-familles{display:none}
+.menu:not(:hover):not(:focus-within) .pastille-menu{display:none}
+
+/* ---------- Pastilles de statut (couleur + icône + mot) ---------- */
+.pastille{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;border-radius:var(--r-rond);font-size:12px;font-weight:400;letter-spacing:.02em;white-space:nowrap;border:1px solid currentColor;background:rgba(0,0,0,.35)}
+.pastille svg{width:13px;height:13px;flex:0 0 13px}
+.pastille.vert{color:var(--c-vert)}
+.pastille.orange{color:var(--c-orange)}
+.pastille.rouge{color:var(--c-rouge)}
+.pastille.aucun{color:var(--c-gris)}
+.pastille-menu{padding:1px 8px 1px 6px;font-size:11px}
+
+/* ---------- Panneau de synchronisation ---------- */
+.sync{margin:var(--e-1) 12px var(--e-2);padding:14px;border-radius:18px;border:1px solid var(--bord);background:rgba(255,255,255,.03)}
+.sync-icone{display:none;width:44px;height:44px;margin:0 auto;border-radius:14px;place-items:center;position:relative;color:var(--c-texte)}
+.sync-icone svg{width:22px;height:22px}
+.sync-icone .point{position:absolute;right:8px;top:8px}
+.menu:not(:hover):not(:focus-within) .sync{padding:6px 0;border-color:transparent;background:transparent;margin:var(--e-1) 0}
+.menu:not(:hover):not(:focus-within) .sync-icone{display:grid}
+.menu:not(:hover):not(:focus-within) .sync-detail{display:none}
+.sync-haut{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.sync-titre{font-size:13px;color:var(--c-principale);font-weight:400}
+.etat{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:var(--c-principale-doux);margin-bottom:10px;min-height:20px}
+.point{width:10px;height:10px;border-radius:50%;flex:0 0 10px;margin-top:5px;background:var(--c-gris)}
+.point.vert{background:var(--c-vert);box-shadow:0 0 0 0 rgba(95,211,154,.6);animation:pulse 2.4s ease-in-out infinite}
+.point.gris{background:var(--c-gris)}
+.point.bleu{background:var(--c-bleu);animation:clignote 1s ease-in-out infinite}
+.point.orange{background:var(--c-orange)}
+.point.rouge{background:var(--c-rouge)}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(95,211,154,.55)}70%{box-shadow:0 0 0 8px rgba(95,211,154,0)}100%{box-shadow:0 0 0 0 rgba(95,211,154,0)}}
+@keyframes clignote{50%{opacity:.35}}
+.sync-infos{font-size:12px;color:var(--c-texte-doux);display:grid;gap:2px;margin-bottom:12px;word-break:break-word}
+.sync-infos b{font-weight:400;color:var(--c-principale-doux)}
+.sync-boutons{display:grid;gap:8px}
+.sync-message{font-size:12px;color:var(--c-principale-doux);margin-top:10px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.04);border:1px solid var(--bord)}
+.lien-discret{background:none;border:0;padding:4px 0;font-size:12px;color:var(--c-texte-doux);text-decoration:underline;text-underline-offset:3px;cursor:pointer;justify-self:start}
+
+/* Interrupteur « Synchronisation » */
+.interrupteur{display:inline-flex;align-items:center;gap:10px;background:none;border:0;padding:2px;cursor:pointer;border-radius:var(--r-rond)}
+.interrupteur .piste{position:relative;width:44px;height:24px;border-radius:12px;background:#3A3A3A;border:1px solid rgba(255,255,255,.14);transition:background var(--duree) var(--courbe);flex:0 0 44px}
+.interrupteur .rond{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#C9C9C9;box-shadow:0 2px 6px rgba(0,0,0,.6);transition:transform var(--duree) var(--courbe), background var(--duree)}
+.interrupteur[aria-checked="true"] .piste{background:var(--c-principale)}
+.interrupteur[aria-checked="true"] .rond{transform:translateX(20px);background:#000}
+
+/* ---------- Boutons premium ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:10px 20px;border-radius:var(--r-rond);font-size:15px;font-weight:400;letter-spacing:.01em;cursor:pointer;text-decoration:none;transition:transform var(--duree) var(--courbe), box-shadow var(--duree), background var(--duree), border-color var(--duree);white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:0 0 18px}
+.btn-principal{color:#000;border:1px solid #F3CD5E;background:linear-gradient(160deg,#F6D46C,#E0AE28 48%,#B88A17);box-shadow:0 10px 30px rgba(224,174,40,.22), inset 0 1px 0 rgba(255,255,255,.55)}
+.btn-principal:hover{transform:translateY(-1px);box-shadow:0 14px 36px rgba(224,174,40,.34), inset 0 1px 0 rgba(255,255,255,.6)}
+.btn-secondaire{color:var(--c-principale);border:1px solid var(--bord-fort);background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02))}
+.btn-secondaire:hover{border-color:rgba(255,255,255,.32);background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.03))}
+.btn-petit{min-height:36px;padding:6px 14px;font-size:13px}
+.btn[disabled]{opacity:.5;cursor:not-allowed;transform:none}
+
+/* ---------- Contenu principal ---------- */
+#contenu{position:relative;z-index:1;margin-left:var(--rail);padding:var(--e-5) var(--e-6) var(--e-10);min-height:100vh}
+.page{max-width:1360px;margin:0 auto}
+.ariane{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:var(--t-legende);color:var(--c-texte-doux);margin-bottom:var(--e-3)}
+.ariane a{text-decoration:none;color:var(--c-texte-doux)}
+.ariane a:hover{color:var(--c-principale)}
+.ariane [aria-current]{color:var(--c-principale)}
+.ariane svg{width:12px;height:12px;opacity:.6}
+.entete-page{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:var(--e-2);margin-bottom:var(--e-4)}
+.surtitre{font-size:var(--t-legende);letter-spacing:.18em;text-transform:uppercase;color:var(--c-texte);margin-bottom:var(--e-1)}
+.section{margin-top:var(--e-6)}
+.section > h2{margin-bottom:var(--e-1)}
+.section > .legende{margin-bottom:var(--e-3)}
+.alertes{display:grid;gap:var(--e-2);margin-bottom:var(--e-3)}
+.alerte{display:flex;gap:var(--e-2);align-items:flex-start;padding:var(--e-2) var(--e-3);border-radius:var(--r-2);border:1px solid rgba(255,107,122,.45);background:rgba(40,4,10,.55);color:var(--c-principale)}
+.alerte.attention{border-color:rgba(242,169,59,.45);background:rgba(40,26,4,.5)}
+.alerte svg{width:22px;height:22px;flex:0 0 22px;color:var(--c-rouge);margin-top:2px}
+.alerte.attention svg{color:var(--c-orange)}
+.alerte ul{margin:6px 0 0;padding-left:18px;color:var(--c-principale-doux);font-size:14px}
+.alerte .actions{margin-top:var(--e-1)}
+
+/* Héros : la réponse principale en 3 secondes */
+.heros{padding:var(--e-5);margin-bottom:var(--e-4);overflow:hidden}
+.heros .verdict{font-family:var(--f-titre);color:var(--c-principale);font-size:clamp(26px,3.2vw,40px);line-height:1.2;max-width:28ch}
+.heros .message{margin-top:var(--e-2);font-size:18px;color:var(--c-principale-doux);max-width:78ch}
+.heros .controle{margin-top:var(--e-3);display:flex;flex-wrap:wrap;gap:var(--e-1) var(--e-2);align-items:center}
+.flux{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:var(--e-2);margin-top:var(--e-4)}
+.flux .bloc{padding:var(--e-2) var(--e-2) 14px;border-radius:var(--r-2);border:1px solid var(--bord);background:rgba(255,255,255,.025)}
+.flux .bloc .lib{font-size:12px;color:var(--c-texte);letter-spacing:.04em;min-height:36px}
+.flux .bloc .val{font-size:clamp(22px,2.2vw,32px);line-height:1.1;margin-top:6px;display:flex;align-items:baseline;flex-wrap:wrap;gap:6px}
+.flux .bloc .val .unite{font-size:13px}
+.flux .bloc .avant{font-size:12px;color:var(--c-texte-doux);margin-top:6px}
+.flux .bloc.total{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.05)}
+
+/* Cartes KPI très grand format */
+.grille-kpi{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e-3)}
+.carte-kpi{padding:var(--e-4);display:flex;flex-direction:column;gap:var(--e-2);cursor:pointer;transition:transform var(--duree) var(--courbe), box-shadow var(--duree) var(--courbe), border-color var(--duree);min-width:0}
+.carte-kpi:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2);box-shadow:0 32px 80px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.1)}
+.carte-kpi.illumine{box-shadow:var(--o-lueur), var(--o-2);border-color:rgba(224,174,40,.7);transition:box-shadow 400ms, border-color 400ms}
+.carte-haut{display:flex;align-items:flex-start;justify-content:space-between;gap:var(--e-2)}
+.carte-titre{display:flex;flex-direction:column;gap:4px;min-width:0}
+.carte-titre a{font-size:15px;color:var(--c-texte);text-decoration:none;letter-spacing:.03em;font-weight:400}
+.carte-titre a:hover{color:var(--c-principale)}
+.carte-titre .code{font-family:var(--f-titre);font-size:12px;color:var(--c-texte-doux);letter-spacing:.1em}
+.valeur-geante{font-size:var(--t-chiffre);line-height:1;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 .22em;word-break:keep-all}
+.valeur-geante .unite{font-size:.3em;letter-spacing:.04em}
+.carte-bas{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--e-2)}
+.comparaison{display:flex;flex-wrap:wrap;gap:var(--e-1) var(--e-3);font-size:15px;color:var(--c-principale-doux)}
+.comparaison .chiffre{font-size:18px}
+.comparaison .variation{color:var(--c-accent);font-family:var(--f-titre);font-size:18px}
+.sparkline{display:block;width:100%;max-width:240px;height:40px;overflow:visible}
+
+/* Infobulle (formule) */
+.infobulle{position:relative;display:inline-flex}
+.bouton-info{width:32px;height:32px;border-radius:50%;border:1px solid var(--bord);background:rgba(255,255,255,.03);display:grid;place-items:center;cursor:help;color:var(--c-texte)}
+.bouton-info svg{width:16px;height:16px}
+.bulle{position:absolute;right:0;top:calc(100% + 8px);z-index:20;width:min(320px, 76vw);padding:12px 14px;border-radius:14px;background:var(--verre-fort);border:1px solid var(--bord-fort);box-shadow:var(--o-1);font-size:13px;color:var(--c-principale);line-height:1.45;opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity var(--duree), transform var(--duree), visibility var(--duree);pointer-events:none;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);white-space:pre-line}
+.infobulle:hover .bulle,.infobulle:focus-within .bulle{opacity:1;visibility:visible;transform:none}
+
+/* Graphiques */
+.grille-graphiques{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e-3)}
+.carte-graphique{padding:var(--e-3);min-width:0}
+.carte-graphique.large{grid-column:1 / -1}
+.carte-graphique h3{margin-bottom:4px}
+.carte-graphique .legende{margin-bottom:var(--e-2)}
+.graphique{width:100%;height:360px}
+.graphique.haut{height:440px}
+.jauges{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--e-2)}
+.jauge{height:230px}
+.jauges .lib-jauge{text-align:center;font-size:13px;color:var(--c-principale-doux);margin-top:-8px}
+
+/* Recommandations */
+.recos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--e-3)}
+.reco{padding:var(--e-3);font-size:15px;color:var(--c-principale-doux)}
+.reco .num{font-family:var(--f-titre);font-size:40px;color:var(--c-accent);line-height:1;margin-bottom:var(--e-2)}
+.note-bas{margin-top:var(--e-2)}
+
+/* Tableau premium du TFT */
+.tableau-carte{padding:var(--e-3) var(--e-3) var(--e-2)}
+.tableau-entete{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--e-2);margin-bottom:var(--e-2)}
+table.tft{width:100%;border-collapse:collapse;table-layout:fixed;font-size:15px}
+table.tft th{font-weight:400;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--c-texte);text-align:left;padding:10px 12px;border-bottom:1px solid var(--bord-fort)}
+table.tft th.num,table.tft td.num{text-align:right}
+table.tft col.c-code{width:64px}
+table.tft col.c-num{width:150px}
+table.tft td{padding:9px 12px;border-bottom:1px solid rgba(255,255,255,.05);color:var(--c-principale-doux);vertical-align:top;overflow-wrap:anywhere}
+table.tft td.code{font-family:var(--f-titre);color:var(--c-texte-doux);font-size:13px}
+table.tft td.num{font-family:var(--f-titre);color:var(--c-principale);font-variant-numeric:tabular-nums;white-space:nowrap}
+table.tft tr.titre td{color:var(--c-texte);font-size:12px;letter-spacing:.14em;text-transform:uppercase;padding-top:18px}
+table.tft tr.sous-total td{color:var(--c-principale)}
+table.tft tr.total td{font-weight:400;color:var(--c-principale);border-top:1px solid var(--bord-fort);background:rgba(255,255,255,.035)}
+table.tft tr.total td.lib,table.tft tr.total td.code{font-weight:400;color:var(--c-principale)}
+table.tft tr.total td.num{font-size:16px;text-shadow:0 0 1px #fff}
+table.tft tr.total td.lib{letter-spacing:.02em;font-weight:600}
+table.tft tr.total td b{font-weight:600}
+
+/* Familles */
+.grille-familles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e-3)}
+.carte-famille{padding:var(--e-3);cursor:pointer;transition:transform var(--duree) var(--courbe), border-color var(--duree)}
+.carte-famille:hover{transform:translateY(-4px);border-color:rgba(255,255,255,.2)}
+.carte-famille .haut{display:flex;justify-content:space-between;align-items:flex-start;gap:var(--e-2);margin-bottom:var(--e-2)}
+.carte-famille h3 a{text-decoration:none}
+.carte-famille ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.carte-famille li{display:flex;justify-content:space-between;gap:var(--e-2);font-size:14px;color:var(--c-principale-doux);align-items:center}
+.carte-famille li .chiffre{font-size:15px;white-space:nowrap}
+
+/* Page KPI */
+.dico{padding:var(--e-4);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e-3) var(--e-4)}
+.dico dt{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--c-texte)}
+.dico dd{margin:6px 0 0;color:var(--c-principale);font-size:16px}
+.dico .plein{grid-column:1 / -1}
+.seuils{display:flex;flex-wrap:wrap;gap:var(--e-1)}
+.feux-detail{display:flex;flex-wrap:wrap;gap:var(--e-1) var(--e-2);align-items:center;font-size:14px;color:var(--c-principale-doux)}
+.voisins{display:flex;flex-wrap:wrap;gap:var(--e-1);margin-top:var(--e-3)}
+
+/* États : chargement, vide, erreur, disjoncteur */
+.squelette{background:linear-gradient(90deg, rgba(255,255,255,.03) 20%, rgba(255,255,255,.09) 50%, rgba(255,255,255,.03) 80%);background-size:200% 100%;animation:miroite 1.4s linear infinite;border-radius:var(--r-3);border:1px solid var(--bord)}
+@keyframes miroite{from{background-position:200% 0}to{background-position:-200% 0}}
+.sq-heros{height:220px;margin-bottom:var(--e-4)}
+.sq-carte{height:300px}
+.etat-vide{padding:var(--e-6) var(--e-5);text-align:center;max-width:760px;margin:var(--e-6) auto}
+.etat-vide h1{margin-bottom:var(--e-2)}
+.etat-vide p{color:var(--c-principale-doux);margin-bottom:var(--e-3)}
+.zone-depot{margin:var(--e-3) auto;padding:var(--e-5) var(--e-3);border:1.5px dashed rgba(224,174,40,.5);border-radius:var(--r-3);background:rgba(224,174,40,.03);color:var(--c-principale-doux);transition:background var(--duree), border-color var(--duree)}
+.zone-depot.survol{background:rgba(224,174,40,.08);border-color:var(--c-accent)}
+.zone-depot svg{width:40px;height:40px;color:var(--c-accent);margin-bottom:var(--e-1)}
+.actions-ligne{display:flex;flex-wrap:wrap;gap:var(--e-2);justify-content:center}
+.etat-vide > svg{width:48px;height:48px;color:var(--c-rouge);margin-bottom:var(--e-2)}
+.disjoncteur{padding:var(--e-6) var(--e-5);text-align:center;max-width:820px;margin:var(--e-6) auto;border-color:rgba(255,107,122,.45)}
+.disjoncteur svg{width:48px;height:48px;color:var(--c-rouge);margin-bottom:var(--e-2)}
+.disjoncteur h1{font-size:32px;margin-bottom:var(--e-2)}
+.disjoncteur p{color:var(--c-principale-doux)}
+.verification{margin-top:var(--e-3);display:flex;gap:10px;align-items:flex-start}
+.verification svg{width:16px;height:16px;flex:0 0 16px;margin-top:3px;color:var(--c-vert)}
+
+/* Dépôt sur toute la page */
+#voile-depot{position:fixed;inset:0;z-index:90;display:none;place-items:center;background:rgba(0,0,0,.78);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#voile-depot.actif{display:grid}
+#voile-depot .cadre{padding:var(--e-6) var(--e-8);border:2px dashed var(--c-accent);border-radius:var(--r-3);text-align:center;color:var(--c-principale);font-family:var(--f-titre);font-size:24px}
+
+/* Toasts */
+#toasts{position:fixed;right:var(--e-3);bottom:var(--e-3);z-index:100;display:grid;gap:var(--e-1);max-width:min(420px, calc(100vw - 32px))}
+.toast{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:16px;background:var(--verre-fort);border:1px solid var(--bord-fort);box-shadow:var(--o-1);color:var(--c-principale);font-size:14px;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);animation:entre 260ms var(--courbe)}
+.toast svg{width:18px;height:18px;flex:0 0 18px;color:var(--c-vert);margin-top:1px}
+.toast.erreur svg{color:var(--c-rouge)}
+.toast.info svg{color:var(--c-accent)}
+@keyframes entre{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ---------- Téléphone et tablette : bande en haut, onglets en bas, volet ---------- */
+#bande-mobile,#onglets{display:none}
+#volet-fond{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.6);display:none}
+#volet{position:fixed;left:0;right:0;bottom:0;z-index:80;max-height:82vh;overflow-y:auto;padding:var(--e-2) var(--e-2) calc(var(--e-3) + env(safe-area-inset-bottom));border-radius:var(--r-3) var(--r-3) 0 0;display:none;background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,0) 30%), rgba(4,4,4,.96);border:1px solid var(--bord);border-bottom:0}
+#volet.ouvert,#volet-fond.ouvert{display:block}
+#volet .poignee{width:44px;height:4px;border-radius:2px;background:rgba(255,255,255,.25);margin:0 auto var(--e-2)}
+#volet .volet-haut{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--e-1)}
+#volet .nav{padding:0}
+#volet .nav-familles{display:block!important}
+#volet .txt,#volet .pastille-menu{opacity:1;display:inline-flex}
+#volet .txt{display:block}
+.bouton-fermer{width:44px;height:44px;border-radius:50%;border:1px solid var(--bord);background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--c-principale)}
+.bouton-fermer svg{width:18px;height:18px}
+
+@media (max-width:1279px){
+  .flux{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .recos{grid-template-columns:1fr}
+}
+@media (max-width:1023px){
+  .menu{display:none}
+  #contenu{margin-left:0;padding:calc(var(--bande) + var(--e-3)) var(--e-3) calc(var(--onglets) + var(--e-4) + env(safe-area-inset-bottom))}
+  #bande-mobile{display:flex;position:fixed;top:0;left:0;right:0;z-index:50;height:var(--bande);align-items:center;gap:10px;padding:0 12px;background:rgba(2,2,2,.9);border-bottom:1px solid var(--bord);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+  #bande-mobile .etat{margin:0;flex:1;min-width:0;align-items:center}
+  #bande-mobile .etat .point{margin-top:0}
+  #bande-mobile .etat span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+  #bande-mobile .bouton-icone{width:40px;height:40px;flex:0 0 40px;border-radius:12px;border:1px solid var(--bord);background:rgba(255,255,255,.04);display:grid;place-items:center;cursor:pointer;color:var(--c-accent)}
+  #bande-mobile .bouton-icone svg{width:20px;height:20px}
+  #onglets{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:50;height:calc(var(--onglets) + env(safe-area-inset-bottom));padding-bottom:env(safe-area-inset-bottom);background:rgba(2,2,2,.92);border-top:1px solid var(--bord);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+  #onglets button{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;color:var(--c-texte-doux);cursor:pointer}
+  #onglets button svg{width:24px;height:24px}
+  #onglets button[aria-current="page"]{color:var(--c-principale)}
+  #toasts{top:calc(var(--bande) + var(--e-1));bottom:auto;right:var(--e-2)}
+  .grille-graphiques{grid-template-columns:1fr}
+}
+@media (max-width:767px){
+  :root{--t-titre:30px;--t-sous-titre:21px}
+  #contenu{padding-left:var(--e-2);padding-right:var(--e-2)}
+  .heros{padding:var(--e-3)}
+  .heros .message{font-size:16px}
+  .flux{grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--e-1)}
+  .grille-kpi,.grille-familles{grid-template-columns:1fr;gap:var(--e-2)}
+  .carte-kpi{padding:var(--e-3)}
+  .jauges{grid-template-columns:1fr}
+  .graphique{height:320px}
+  .graphique.haut{height:480px}
+  .dico{grid-template-columns:1fr;padding:var(--e-3)}
+  table.tft{font-size:13px}
+  table.tft col.c-code{width:40px}
+  table.tft col.c-num{width:76px}
+  table.tft td,table.tft th{padding:8px 6px}
+  table.tft tr.total td.num{font-size:13px}
+  .etat-vide,.disjoncteur{padding:var(--e-4) var(--e-2)}
+  #fond .reflet,#fond::after{animation:none}
+}
+
+/* ---------- Réduire les animations ---------- */
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  #fond .reflet,#fond::after{animation:none!important}
+  .point.vert,.point.bleu,.squelette{animation:none!important}
+  .carte-kpi:hover,.carte-famille:hover,.btn-principal:hover{transform:none}
+}
+</style>
+<noscript><style>html.anti-cadre body{visibility:visible}</style></noscript>
+</head>
+<body>
+<noscript><p style="padding:24px;color:#E0AE28">Cette application a besoin de JavaScript pour lire le fichier Excel.</p></noscript>
+
+<!-- Fond animé : noir laqué, reflets lents, particules -->
+<div id="fond" aria-hidden="true"><div class="reflet r1"></div><div class="reflet r2"></div><div class="reflet r3"></div></div>
+<canvas id="particules" aria-hidden="true"></canvas>
+
+<!-- Menu latéral (ordinateur) : rail d'icônes qui se déplie au survol -->
+<aside class="menu" id="menu" aria-label="Menu principal">
+  <div class="marque">
+    <div class="monogramme" aria-hidden="true">A</div>
+    <div class="txt"><b>ATLAS DISTRIBUTION</b><span>TFT IAS 7 · Casablanca</span></div>
+  </div>
+  <nav class="nav" id="nav-ordinateur" aria-label="Écrans et familles de KPI"></nav>
+  <section class="sync" id="sync-ordinateur" aria-label="Synchronisation avec le fichier Excel"></section>
+</aside>
+
+<!-- Bande compacte de synchronisation (téléphone et tablette) -->
+<header id="bande-mobile" aria-label="Synchronisation avec le fichier Excel"></header>
+
+<main id="contenu" tabindex="-1">
+  <div class="page">
+    <nav class="ariane" id="ariane" aria-label="Fil d'Ariane"></nav>
+    <div class="alertes" id="alertes" role="alert" aria-live="assertive"></div>
+    <div id="vue"></div>
+  </div>
+</main>
+
+<!-- Barre d'onglets (téléphone et tablette) -->
+<nav id="onglets" aria-label="Écrans"></nav>
+<div id="volet-fond"></div>
+<div id="volet" role="dialog" aria-modal="true" aria-label="Familles et KPI"></div>
+
+<div id="voile-depot" aria-hidden="true"><div class="cadre">Déposez votre fichier Excel ici</div></div>
+<div id="toasts" role="status" aria-live="polite"></div>
+<input type="file" id="choix-fichier" accept=".xlsx,.xlsm,.xls,.csv" class="lecteur-seul" tabindex="-1" aria-hidden="true">
+
+<!-- Bibliothèques autorisées, version exacte dans l'adresse -->
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.6.0/echarts.min.js" crossorigin="anonymous"></script>
+<script>
+/* =========================================================================
+   ATLAS DISTRIBUTION SA · Situation TFT 2027 face à 2026
+   Application 100 % navigateur : aucune donnée ne quitte l'appareil.
+   Sections : Configuration · Sécurité · Lecture des données ·
+              Synchronisation · Calculs · Affichage · Graphiques · Démarrage
+   ========================================================================= */
+(function () {
+  'use strict';
+
+  /* =======================================================================
+     1. CONFIGURATION
+     ======================================================================= */
+
+  /* Le contrat de format : toute la lecture et toute la validation passent
+     par cet objet. Onglets, noms définis, codes de ligne, types et
+     synonymes acceptés. Les noms et les codes sont comparés sans tenir
+     compte des majuscules, des accents ni des espaces. */
+  const FORMAT_ATTENDU = Object.freeze({
+    periodes: { courant: 2027, precedent: 2026 },
+    statutAttendu: 'CONFORME',
+    onglets: {
+      lisezMoi:  { nom: 'LISEZ-MOI', requis: true, synonymes: ['LISEZ MOI', 'LISEZMOI', 'LIRE-MOI', 'README'] },
+      input:     { nom: 'INPUT', requis: false, synonymes: ['ENTREES', 'DONNEES'] },
+      retIfrs:   { nom: 'RETRAITEMENTS-IFRS', requis: false, synonymes: ['RETRAITEMENTS IFRS'] },
+      retTft:    { nom: 'RETRAITEMENTS-TFT', requis: false, synonymes: ['RETRAITEMENTS TFT'] },
+      tft:       { nom: 'TFT', requis: true, synonymes: ['TABLEAU DES FLUX', 'TABLEAU DES FLUX DE TRESORERIE'] },
+      dettes:    { nom: 'DETTES-FINANCEMENT', requis: false, synonymes: ['DETTES FINANCEMENT'] },
+      pont:      { nom: 'PONT-CGNC', requis: false, synonymes: ['PONT CGNC'] },
+      kpi:       { nom: 'KPI', requis: true, synonymes: ['INDICATEURS'] },
+      dashboard: { nom: 'DASHBOARD', requis: false, synonymes: ['TABLEAU DE BORD'] },
+      controles: { nom: 'CONTROLES', requis: true, synonymes: ['CONTROLE', 'CONTRÔLES'] },
+      journal:   { nom: 'JOURNAL', requis: false, synonymes: [] }
+    },
+    /* Noms définis lus directement (type : nombre, texte, ou nombre-ou-texte
+       quand Excel peut afficher « n.s. »). */
+    nomsDefinis: [
+      { nom: 'TFT_OT_2027', onglet: 'TFT', type: 'nombre', exemple: 326000 },
+      { nom: 'TFT_OT_2026', onglet: 'TFT', type: 'nombre', exemple: 248000 },
+      { nom: 'TFT_IT_2027', onglet: 'TFT', type: 'nombre', exemple: -530000 },
+      { nom: 'TFT_IT_2026', onglet: 'TFT', type: 'nombre', exemple: 0 },
+      { nom: 'TFT_FT_2027', onglet: 'TFT', type: 'nombre', exemple: 39200 },
+      { nom: 'TFT_FT_2026', onglet: 'TFT', type: 'nombre', exemple: -256000 },
+      { nom: 'TFT_V_2027', onglet: 'TFT', type: 'nombre', exemple: -164800 },
+      { nom: 'TFT_V_2026', onglet: 'TFT', type: 'nombre', exemple: -8000 },
+      { nom: 'TFT_T0_2027', onglet: 'TFT', type: 'nombre', exemple: 112000 },
+      { nom: 'TFT_T0_2026', onglet: 'TFT', type: 'nombre', exemple: 120000 },
+      { nom: 'TFT_T1_2027', onglet: 'TFT', type: 'nombre', exemple: -52800 },
+      { nom: 'TFT_T1_2026', onglet: 'TFT', type: 'nombre', exemple: 112000 },
+      { nom: 'KPI_CONV_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 0.84, code: 'K01' },
+      { nom: 'KPI_CONV_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 0.60, code: 'K01' },
+      { nom: 'KPI_OT_RN_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 19.52, code: 'K02' },
+      { nom: 'KPI_OT_RN_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 1.29, code: 'K02' },
+      { nom: 'KPI_FCF_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: -174000, code: 'K03' },
+      { nom: 'KPI_FCF_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 248000, code: 'K03' },
+      { nom: 'KPI_FCF_LOY_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: -274000, code: 'K04' },
+      { nom: 'KPI_FCF_LOY_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 248000, code: 'K04' },
+      { nom: 'KPI_CAPEX_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 1.90, code: 'K05' },
+      { nom: 'KPI_CAPEX_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 0, code: 'K05' },
+      { nom: 'KPI_DSO_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 33.2, code: 'K06' },
+      { nom: 'KPI_DSO_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 38.6, code: 'K06' },
+      { nom: 'KPI_DIO_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 56.0, code: 'K07' },
+      { nom: 'KPI_DIO_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 48.9, code: 'K07' },
+      { nom: 'KPI_DPO_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 42.7, code: 'K08' },
+      { nom: 'KPI_DPO_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 40.1, code: 'K08' },
+      { nom: 'KPI_CCC_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 46.5, code: 'K09' },
+      { nom: 'KPI_CCC_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 47.4, code: 'K09' },
+      { nom: 'KPI_DN_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 1159310, code: 'K10' },
+      { nom: 'KPI_DN_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 368000, code: 'K10' },
+      { nom: 'KPI_LEV_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 2.99, code: 'K11' },
+      { nom: 'KPI_LEV_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 0.89, code: 'K11' },
+      { nom: 'KPI_LEV_X16_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 2.82, code: 'K12' },
+      { nom: 'KPI_LEV_X16_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 0.89, code: 'K12' },
+      { nom: 'KPI_DSCR_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 1.25, code: 'K13' },
+      { nom: 'KPI_DSCR_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 1.59, code: 'K13' },
+      { nom: 'KPI_DIV_2027', onglet: 'KPI', type: 'nombre-ou-texte', exemple: -1.74, code: 'K14' },
+      { nom: 'KPI_DIV_2026', onglet: 'KPI', type: 'nombre-ou-texte', exemple: 2.48, code: 'K14' },
+      { nom: 'PARAM_TVA', onglet: 'KPI', type: 'nombre', exemple: 0.2 },
+      { nom: 'PARAM_JOURS', onglet: 'KPI', type: 'nombre', exemple: 360 },
+      { nom: 'PARAM_PLAFOND', onglet: 'KPI', type: 'nombre', exemple: 2.5 },
+      { nom: 'PARAM_MOIS_EQ', onglet: 'KPI', type: 'nombre', exemple: 3 },
+      { nom: 'PARAM_CIBLE_CONV', onglet: 'KPI', type: 'nombre', exemple: 0.8 },
+      { nom: 'PARAM_CIBLE_DSCR', onglet: 'KPI', type: 'nombre', exemple: 1.5 },
+      { nom: 'PARAM_CIBLE_DIV', onglet: 'KPI', type: 'nombre', exemple: 1.5 },
+      { nom: 'PARAM_CIBLE_LEV', onglet: 'KPI', type: 'nombre', exemple: 2.5 },
+      { nom: 'PARAM_CIBLE_CCC', onglet: 'KPI', type: 'nombre', exemple: 45 },
+      { nom: 'PARAM_CIBLE_CAPEX', onglet: 'KPI', type: 'nombre', exemple: 1 },
+      { nom: 'PARAM_MAX_CONV', onglet: 'KPI', type: 'nombre', exemple: 1.2 },
+      { nom: 'PARAM_MAX_LEV', onglet: 'KPI', type: 'nombre', exemple: 4 },
+      { nom: 'PARAM_MAX_DSCR', onglet: 'KPI', type: 'nombre', exemple: 2.5 },
+      { nom: 'STATUT_GLOBAL', onglet: 'CONTROLES', type: 'texte', exemple: 'CONFORME' }
+    ],
+    /* Codes de ligne du TFT (colonne B de l'onglet TFT, méthode indirecte). */
+    codesTFT: {
+      onglet: 'tft',
+      requis: ['O1', 'OT', 'I1', 'I2', 'IT', 'F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'FT', 'V', 'T0', 'T1'],
+      premier: 'O1', dernier: 'T1',
+      totaux: ['OT', 'IT', 'FT', 'V', 'T0', 'T1'],
+      sousTotaux: ['OS'],
+      entetes: {
+        code: ['LIGNE', 'CODE', 'N°', 'NO', 'NUMERO'],
+        libelle: ['LIBELLE', 'INTITULE', 'POSTE'],
+        courant: ['2027', 'EXERCICE 2027', 'N'],
+        precedent: ['2026', 'EXERCICE 2026', 'N-1'],
+        note: ['NOTE', 'NOTES', 'RENVOI']
+      }
+    },
+    /* Codes des KPI (colonne B de l'onglet KPI, section 1). */
+    codesKPI: {
+      onglet: 'kpi',
+      requis: ['K01', 'K02', 'K03', 'K04', 'K05', 'K06', 'K07', 'K08', 'K09', 'K10', 'K11', 'K12', 'K13', 'K14'],
+      motif: /^K\d{2}$/,
+      entetes: {
+        code: ['N°', 'NO', 'CODE', 'NUMERO'],
+        libelle: ['KPI', 'INDICATEUR', 'LIBELLE'],
+        courant: ['2027'],
+        precedent: ['2026'],
+        variation: ['VARIATION', 'ECART'],
+        feuCourant: ['FEU 2027', 'STATUT 2027'],
+        feuPrecedent: ['FEU 2026', 'STATUT 2026'],
+        nomDefini: ['NOM DEFINI · UNITE', 'NOM DEFINI', 'NOM DEFINI - UNITE']
+      }
+    },
+    dictionnaire: {
+      onglet: 'kpi',
+      entetes: {
+        code: ['N°', 'NO', 'CODE'],
+        definition: ['DEFINITION'],
+        unite: ['UNITE'],
+        vert: ['VERT', 'SEUIL VERT'],
+        ambre: ['AMBRE', 'ORANGE', 'SEUIL AMBRE', 'SEUIL ORANGE'],
+        rouge: ['ROUGE', 'SEUIL ROUGE'],
+        pourquoi: ['POURQUOI IL COMPTE', 'POURQUOI']
+      }
+    },
+    seuils: {
+      onglet: 'kpi',
+      entetes: { code: ['N°', 'NO', 'CODE'], sens: ['SENS'], vert: ['SEUIL VERT'], ambre: ['SEUIL AMBRE', 'SEUIL ORANGE'] }
+    },
+    graphiques: {
+      onglet: 'kpi',
+      radar:     { titre: 'RADAR', entetes: { v27: ['VALEUR 2027'], v26: ['VALEUR 2026'], cible: ['CIBLE'], s27: ['SCORE 2027'], s26: ['SCORE 2026'], sens: ['SENS'] } },
+      entonnoir: { titre: 'ENTONNOIR', entetes: { valeur: ['VALEUR'] } },
+      cascade:   { titre: 'CASCADE', entetes: { debut: ['DEBUT'], fin: ['FIN'] } },
+      jauge:     { titre: 'JAUGE', entetes: { valeur: ['VALEUR'], maximum: ['MAXIMUM'], repere: ['REPERE'] } }
+    },
+    decision: {
+      onglet: 'kpi',
+      titre: 'POSTE DU CYCLE DE CASH',
+      entetes: { valeur: ['VALEUR 2027'], seuilVert: ['SEUIL VERT'], ecart: ['ECART AU VERT'] },
+      nombreRecommandations: 3
+    },
+    messagePrincipal: { onglet: 'lisezMoi', titre: 'LE MESSAGE PRINCIPAL' },
+    controles: { onglet: 'controles', total: ['NOMBRE DE CONTROLES'], conformes: ['CONTROLES CONFORMES'] }
+  });
+
+  /* Les familles sont fixées ici ; noms, valeurs, feux et descriptions
+     viennent du fichier. */
+  const FAMILLES = Object.freeze([
+    { id: 'qualite', nom: 'Qualité du cash', icone: 'goutte', kpis: ['K01', 'K02'] },
+    { id: 'cash-libre', nom: 'Cash libre et investissements', icone: 'portefeuille', kpis: ['K03', 'K04', 'K05'] },
+    { id: 'bfr', nom: 'BFR et cycle de cash', icone: 'cycle', kpis: ['K06', 'K07', 'K08', 'K09'] },
+    { id: 'dette', nom: 'Dette et solvabilité', icone: 'banque', kpis: ['K10', 'K11', 'K12', 'K13'] },
+    { id: 'actionnaires', nom: 'Actionnaires', icone: 'actionnaires', kpis: ['K14'] }
+  ]);
+
+  /* Les 6 cartes de l'onglet DASHBOARD, affichées sur « Situation TFT ». */
+  const CARTES_SITUATION = Object.freeze(['K01', 'K03', 'K09', 'K11', 'K13', 'K14']);
+
+  const LIMITES = Object.freeze({ tailleMax: 10 * 1024 * 1024, lignesMax: 50000 });
+  const EXTENSIONS = Object.freeze(['.xlsx', '.xlsm', '.xls', '.csv']);
+  const INTERVALLES = Object.freeze({ direct: 2000, localhost: 3000, enLigne: 60000 });
+  const NOM_FICHIER_EN_LIGNE = 'donnees.xlsx';
+  const CLE_SYNC = 'atlas-tft.synchronisation';
+  const BASE_IDB = 'atlas-tft';
+  const MAGASIN_IDB = 'poignees';
+  const CLE_POIGNEE = 'fichier-connecte';
+  const ATTENTE_ENREGISTREMENT = 700;
+  const REPRISES = 3;
+  const DELAI_REPRISE = 333;
+
+  const FEUX = Object.freeze({
+    vert:   { mot: 'Vert', icone: 'coche', rang: 1 },
+    orange: { mot: 'Orange', icone: 'alerte', rang: 2 },
+    rouge:  { mot: 'Rouge', icone: 'croix', rang: 3 },
+    aucun:  { mot: 'Sans seuil', icone: 'tiret', rang: 0 }
+  });
+
+  const ICONES = Object.freeze({
+    situation: ['M3 3v18h18', 'M7 15l4-4 3 3 5-6'],
+    familles: ['M4 4h6v6H4z', 'M14 4h6v6h-6z', 'M4 14h6v6H4z', 'M14 14h6v6h-6z'],
+    goutte: ['M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z'],
+    portefeuille: ['M3 7h15a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3H3z', 'M3 7l12-4v4', 'M16 13.5h2'],
+    cycle: ['M20 12a8 8 0 1 1-2.3-5.7', 'M20 4v4h-4'],
+    banque: ['M3 10l9-6 9 6', 'M5 10v8', 'M9.5 10v8', 'M14.5 10v8', 'M19 10v8', 'M3 20h18'],
+    actionnaires: ['M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z', 'M2 21a7 7 0 0 1 14 0', 'M16 3.5a4 4 0 0 1 0 7.5', 'M22 21a7 7 0 0 0-4-6.3'],
+    sync: ['M21 12a9 9 0 0 1-15.5 6.2', 'M3 12a9 9 0 0 1 15.5-6.2', 'M18.5 2v4h-4', 'M5.5 22v-4h4'],
+    fichier: ['M14 3H6v18h12V7z', 'M14 3v4h4'],
+    importer: ['M12 15V3', 'M7 8l5-5 5 5', 'M4 15v6h16v-6'],
+    exporter: ['M12 3v12', 'M7 10l5 5 5-5', 'M4 17v4h16v-4'],
+    coche: ['M5 12l5 5 9-10'],
+    alerte: ['M12 3l10 18H2z', 'M12 10v5', 'M12 18h.01'],
+    croix: ['M6 6l12 12', 'M18 6L6 18'],
+    tiret: ['M5 12h14'],
+    info: ['M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z', 'M12 11v6', 'M12 7h.01'],
+    chevron: ['M9 6l6 6-6 6'],
+    lien: ['M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1', 'M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1'],
+    bouclier: ['M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z', 'M9 12l2 2 4-4'],
+    disjoncteur: ['M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z', 'M12 8v5', 'M12 16h.01'],
+    fermer: ['M6 6l12 12', 'M18 6L6 18'],
+    liste: ['M4 6h16', 'M4 12h16', 'M4 18h16']
+  });
+
+  const PALETTE = Object.freeze({
+    or: '#E0AE28', grenat: '#A3263B', blanc: '#FFFFFF', texte: '#E0AE28',
+    texteDoux: '#C39A2E', grille: 'rgba(255,255,255,0.07)', axe: 'rgba(255,255,255,0.18)'
+  });
+
+  /* =======================================================================
+     2. SÉCURITÉ
+     ======================================================================= */
+
+  /* Protection contre l'affichage dans une fausse page (clickjacking). */
+  function estDansUnCadre() {
+    try { return window.top !== window.self; } catch (e) { return true; }
+  }
+
+  /* Noms de colonnes interdits (pollution d'objets). */
+  const COLONNES_INTERDITES = new Set(['__PROTO__', 'CONSTRUCTOR', 'PROTOTYPE']);
+
+  function objetSansPrototype() { return Object.create(null); }
+
+  /* Neutralise les formules piégées dans les exports Excel. */
+  function neutraliserCellule(valeur) {
+    if (typeof valeur !== 'string') return valeur;
+    return /^[=+\-−@\t\r\n]/.test(valeur) ? "'" + valeur : valeur;
+  }
+
+  class ErreurSecurite extends Error {}
+  class ErreurLecture extends Error {}
+  class ErreurStructure extends Error {
+    constructor(problemes) { super('Structure du fichier non conforme'); this.problemes = problemes; }
+  }
+
+  function extensionDe(nom) {
+    const i = String(nom || '').lastIndexOf('.');
+    return i < 0 ? '' : String(nom).slice(i).toLowerCase();
+  }
+
+  function formatTaille(octets) {
+    return formatNombre(octets / (1024 * 1024), 1) + ' Mo';
+  }
+
+  /* Contrôles avant toute lecture : extension, taille, signature binaire. */
+  function verifierFichier(nom, taille, octets) {
+    const ext = extensionDe(nom);
+    if (!EXTENSIONS.includes(ext)) {
+      throw new ErreurSecurite('Format refusé : seuls les fichiers .xlsx, .xlsm, .xls et .csv sont acceptés.');
+    }
+    if (taille > LIMITES.tailleMax) {
+      throw new ErreurSecurite('Fichier refusé : ' + formatTaille(taille) + ' pour un maximum de 10 Mo.');
+    }
+    if (!octets) return ext;
+    if (ext === '.xlsx' || ext === '.xlsm') {
+      const zip = octets.length > 4 && octets[0] === 0x50 && octets[1] === 0x4B && octets[2] === 0x03 && octets[3] === 0x04;
+      if (!zip) throw new ErreurSecurite('Ce fichier porte l’extension ' + ext + ' mais ce n’est pas un vrai classeur Excel.');
+    } else if (ext === '.xls') {
+      const ole = [0xD0, 0xCF, 0x11, 0xE0, 0xA1, 0xB1, 0x1A, 0xE1].every(function (b, i) { return octets[i] === b; });
+      if (!ole) throw new ErreurSecurite('Ce fichier porte l’extension .xls mais ce n’est pas un vrai classeur Excel.');
+    } else if (ext === '.csv') {
+      const echantillon = octets.subarray(0, Math.min(octets.length, 4096));
+      if (echantillon.indexOf(0) !== -1) throw new ErreurSecurite('Ce fichier .csv contient des données binaires : il est refusé.');
+    }
+    return ext;
+  }
+
+  /* Création d'éléments : uniquement createElement et textContent. */
+  function el(balise, attributs, enfants) {
+    const n = document.createElement(balise);
+    if (attributs) {
+      for (const cle of Object.keys(attributs)) {
+        const v = attributs[cle];
+        if (v === null || v === undefined || v === false) continue;
+        if (/^on/i.test(cle)) continue; /* jamais d'attribut d'événement */
+        if (cle === 'class') n.className = v;
+        else if (cle === 'texte') n.textContent = String(v);
+        else n.setAttribute(cle, v === true ? '' : String(v));
+      }
+    }
+    ajouterEnfants(n, enfants);
+    return n;
+  }
+  function ajouterEnfants(n, enfants) {
+    if (enfants === null || enfants === undefined) return;
+    const liste = Array.isArray(enfants) ? enfants : [enfants];
+    for (const e of liste) {
+      if (e === null || e === undefined || e === false) continue;
+      if (typeof e === 'string' || typeof e === 'number') n.appendChild(document.createTextNode(String(e)));
+      else n.appendChild(e);
+    }
+  }
+  const NS_SVG = 'http://www.w3.org/2000/svg';
+  function icone(nom) {
+    const svg = document.createElementNS(NS_SVG, 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '1.5');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('focusable', 'false');
+    for (const d of (ICONES[nom] || [])) {
+      const p = document.createElementNS(NS_SVG, 'path');
+      p.setAttribute('d', d);
+      svg.appendChild(p);
+    }
+    return svg;
+  }
+
+  /* =======================================================================
+     3. LECTURE DES DONNÉES
+     ======================================================================= */
+
+  /* Normalisation : majuscules, sans accents, espaces réduits. */
+  function normaliser(texte) {
+    return String(texte === null || texte === undefined ? '' : texte)
+      .normalize('NFD').replace(/[̀-ͯ]/g, '')
+      .replace(/[’‘`]/g, "'")
+      .replace(/[   ]/g, ' ')
+      .replace(/\s+/g, ' ').trim().toUpperCase();
+  }
+  function normaliserNomOnglet(texte) { return normaliser(texte).replace(/[\s_\-.]+/g, ''); }
+
+  /* Lecture tolérante des nombres : « 1 234,56 », « 1,234.56 », « (1 234) », « 12 % ». */
+  function lireNombreTexte(brut) {
+    let s = String(brut).trim();
+    if (!s) return null;
+    let negatif = false;
+    if (/^\(.*\)$/.test(s)) { negatif = true; s = s.slice(1, -1); }
+    s = s.replace(/[   \s]/g, '').replace(/−/g, '-');
+    let pourcent = false;
+    if (s.endsWith('%')) { pourcent = true; s = s.slice(0, -1); }
+    s = s.replace(/(MAD|DH|DHS|KMAD|J|JOURS|×|X)$/i, '');
+    if (s.startsWith('-')) { negatif = !negatif; s = s.slice(1); }
+    else if (s.startsWith('+')) s = s.slice(1);
+    const virgule = s.lastIndexOf(','), point = s.lastIndexOf('.');
+    if (virgule >= 0 && point >= 0) {
+      if (virgule > point) s = s.replace(/\./g, '').replace(',', '.');
+      else s = s.replace(/,/g, '');
+    } else if (virgule >= 0) {
+      s = (s.split(',').length > 2) ? s.replace(/,/g, '') : s.replace(',', '.');
+    } else if (point >= 0 && s.split('.').length > 2) {
+      s = s.replace(/\./g, '');
+    }
+    if (!/^\d*\.?\d+(e[+-]?\d+)?$/i.test(s)) return null;
+    let n = Number(s);
+    if (!Number.isFinite(n)) return null;
+    if (pourcent) n = n / 100;
+    return negatif ? -n : n;
+  }
+
+  /* Adresses de cellules sans dépendre d'une adresse figée. */
+  function lettresColonne(c) {
+    let s = '', n = c + 1;
+    while (n > 0) { const m = (n - 1) % 26; s = String.fromCharCode(65 + m) + s; n = Math.floor((n - 1) / 26); }
+    return s;
+  }
+  function adresse(r, c) { return lettresColonne(c) + (r + 1); }
+  function decoderAdresse(a) {
+    const m = /^\$?([A-Z]{1,3})\$?(\d+)$/.exec(String(a).toUpperCase());
+    if (!m) return null;
+    let c = 0;
+    for (const ch of m[1]) c = c * 26 + (ch.charCodeAt(0) - 64);
+    return { r: Number(m[2]) - 1, c: c - 1 };
+  }
+  function plageFeuille(ws) {
+    const ref = ws && ws['!ref'];
+    if (!ref) return { s: { r: 0, c: 0 }, e: { r: -1, c: -1 } };
+    const parts = String(ref).split(':');
+    const s = decoderAdresse(parts[0]), e = decoderAdresse(parts[1] || parts[0]);
+    if (!s || !e) return { s: { r: 0, c: 0 }, e: { r: -1, c: -1 } };
+    return { s: s, e: e };
+  }
+
+  /* Contexte de lecture : erreurs, avertissements, cellules en erreur. */
+  function creerContexte(classeur) {
+    return {
+      classeur: classeur,
+      problemes: [],
+      cellulesEnErreur: 0,
+      formulesSansValeur: 0,
+      noms: new Map(),
+      onglets: new Map(),
+      ajouterProbleme: function (onglet, element, message) { this.problemes.push({ onglet: onglet, element: element, message: message }); }
+    };
+  }
+
+  function cellule(ws, r, c) { return ws ? ws[adresse(r, c)] : undefined; }
+
+  /* Valeur brute d'une cellule : erreurs Excel traitées comme vides. */
+  function valeurCellule(ctx, cel) {
+    if (!cel) return null;
+    if (cel.t === 'e') { ctx.cellulesEnErreur++; return null; }
+    if (cel.t === 'z') return null;
+    if (cel.v === undefined || cel.v === null) {
+      if (cel.f) ctx.formulesSansValeur++;
+      return null;
+    }
+    if (cel.t === 'n') return Number.isFinite(cel.v) ? cel.v : null;
+    if (cel.t === 'b') return cel.v ? 'VRAI' : 'FAUX';
+    if (cel.t === 'd' || cel.v instanceof Date) return cel.v instanceof Date ? cel.v.toISOString().slice(0, 10) : String(cel.v);
+    return String(cel.v);
+  }
+  function texteCellule(ctx, cel) {
+    const v = valeurCellule(ctx, cel);
+    if (v === null) return '';
+    return typeof v === 'number' ? String(v) : String(v).trim();
+  }
+  function nombreCellule(ctx, cel) {
+    const v = valeurCellule(ctx, cel);
+    if (v === null) return null;
+    if (typeof v === 'number') return v;
+    return lireNombreTexte(v);
+  }
+  /* « n.s. » et autres textes sont gardés tels quels pour les KPI. */
+  function nombreOuTexteCellule(ctx, cel) {
+    const v = valeurCellule(ctx, cel);
+    if (v === null) return null;
+    if (typeof v === 'number') return v;
+    const n = lireNombreTexte(v);
+    return n === null ? String(v).trim() : n;
+  }
+
+  function trouverOnglet(ctx, cle) {
+    if (ctx.onglets.has(cle)) return ctx.onglets.get(cle);
+    const def = FORMAT_ATTENDU.onglets[cle];
+    const candidats = [def.nom].concat(def.synonymes || []).map(normaliserNomOnglet);
+    let trouve = null;
+    for (const nom of ctx.classeur.SheetNames || []) {
+      if (candidats.includes(normaliserNomOnglet(nom))) { trouve = { nom: nom, ws: ctx.classeur.Sheets[nom] }; break; }
+    }
+    ctx.onglets.set(cle, trouve);
+    return trouve;
+  }
+  function trouverOngletParNomExact(ctx, nomFeuille) {
+    const cible = normaliserNomOnglet(nomFeuille);
+    for (const nom of ctx.classeur.SheetNames || []) {
+      if (normaliserNomOnglet(nom) === cible) return { nom: nom, ws: ctx.classeur.Sheets[nom] };
+    }
+    return null;
+  }
+
+  /* Noms définis du classeur, indexés sans tenir compte des majuscules. */
+  function indexerNoms(ctx) {
+    const liste = (ctx.classeur.Workbook && ctx.classeur.Workbook.Names) || [];
+    for (const n of liste) {
+      if (!n || !n.Name || n.Sheet !== undefined && n.Sheet !== null) continue;
+      ctx.noms.set(normaliser(n.Name), String(n.Ref || ''));
+    }
+  }
+  function decoderReference(ref) {
+    const m = /^(?:'((?:[^']|'')+)'|([^!]+))!(\$?[A-Z]{1,3}\$?\d+)(?::\$?[A-Z]{1,3}\$?\d+)?$/i.exec(String(ref).trim().replace(/^=/, ''));
+    if (!m) return null;
+    const feuille = m[1] !== undefined ? m[1].replace(/''/g, "'") : m[2];
+    const pos = decoderAdresse(m[3]);
+    return pos ? { feuille: feuille, r: pos.r, c: pos.c } : null;
+  }
+  function lireNomDefini(ctx, def) {
+    const ref = ctx.noms.get(normaliser(def.nom));
+    if (ref === undefined) {
+      ctx.ajouterProbleme(def.onglet, def.nom, 'Nom défini manquant : « ' + def.nom + ' » (onglet ' + def.onglet + '). Recréez-le dans Excel : Formules › Gestionnaire de noms.');
+      return null;
+    }
+    const pos = decoderReference(ref);
+    if (!pos) {
+      ctx.ajouterProbleme(def.onglet, def.nom, 'Le nom défini « ' + def.nom + ' » (onglet ' + def.onglet + ') pointe vers une référence invalide (' + (ref || 'vide') + ').');
+      return null;
+    }
+    const feuille = trouverOngletParNomExact(ctx, pos.feuille);
+    if (!feuille) {
+      ctx.ajouterProbleme(def.onglet, def.nom, 'Le nom défini « ' + def.nom + ' » pointe vers l’onglet « ' + pos.feuille + ' », introuvable.');
+      return null;
+    }
+    const cel = cellule(feuille.ws, pos.r, pos.c);
+    const avant = ctx.formulesSansValeur;
+    let v;
+    if (def.type === 'texte') v = texteCellule(ctx, cel) || null;
+    else if (def.type === 'nombre') v = nombreCellule(ctx, cel);
+    else v = nombreOuTexteCellule(ctx, cel);
+    if (v === null) {
+      if (ctx.formulesSansValeur > avant) {
+        ctx.ajouterProbleme(def.onglet, def.nom, 'La formule du nom « ' + def.nom + ' » (onglet ' + def.onglet + ') n’a pas de valeur calculée. Ouvrez le fichier dans Excel et enregistrez-le pour calculer les formules.');
+      } else if (def.type === 'nombre' || def.type === 'texte') {
+        ctx.ajouterProbleme(def.onglet, def.nom, 'Le nom défini « ' + def.nom + ' » (onglet ' + def.onglet + ', ' + adresse(pos.r, pos.c) + ') est vide ou n’est pas ' + (def.type === 'nombre' ? 'un nombre' : 'un texte') + '.');
+      }
+    }
+    return v;
+  }
+
+  /* Cherche une ligne d'en-têtes : renvoie la ligne et la carte des colonnes. */
+  function carteEntetes(ctx, ws, r, synonymes, cDebut, cFin) {
+    const carte = objetSansPrototype();
+    const plage = plageFeuille(ws);
+    const debut = cDebut === undefined ? plage.s.c : cDebut;
+    const fin = cFin === undefined ? plage.e.c : cFin;
+    for (let c = debut; c <= fin; c++) {
+      const t = normaliser(texteCellule(ctx, cellule(ws, r, c)));
+      if (!t || COLONNES_INTERDITES.has(t)) continue; /* __proto__, constructor, prototype : ignorés */
+      for (const cle of Object.keys(synonymes)) {
+        if (carte[cle] !== undefined) continue;
+        if (synonymes[cle].some(function (s) { return normaliser(s) === t; })) { carte[cle] = c; break; }
+      }
+    }
+    return carte;
+  }
+  function chercherLigneEntetes(ctx, ws, synonymes, obligatoires, rDebut, rFin) {
+    const plage = plageFeuille(ws);
+    const debut = rDebut === undefined ? plage.s.r : rDebut;
+    const fin = Math.min(rFin === undefined ? plage.e.r : rFin, plage.e.r);
+    for (let r = debut; r <= fin; r++) {
+      const carte = carteEntetes(ctx, ws, r, synonymes);
+      if (obligatoires.every(function (k) { return carte[k] !== undefined; })) return { r: r, colonnes: carte };
+    }
+    return null;
+  }
+  /* Cherche une cellule dont le texte commence par un titre donné. */
+  function chercherTitre(ctx, ws, titre, rDebut) {
+    const plage = plageFeuille(ws);
+    const cible = normaliser(titre);
+    for (let r = rDebut || plage.s.r; r <= plage.e.r; r++) {
+      for (let c = plage.s.c; c <= Math.min(plage.e.c, plage.s.c + 15); c++) {
+        const t = normaliser(texteCellule(ctx, cellule(ws, r, c)));
+        if (t && t.startsWith(cible)) return { r: r, c: c };
+      }
+    }
+    return null;
+  }
+  /* Colonne des codes : en-tête reconnu, sinon colonne B, sinon recherche. */
+  function colonneDesCodes(ctx, ws, rEntete, carte, motif) {
+    if (carte.code !== undefined) return carte.code;
+    const plage = plageFeuille(ws);
+    for (let c = plage.s.c; c <= Math.min(plage.e.c, 9); c++) {
+      for (let r = rEntete + 1; r <= Math.min(plage.e.r, rEntete + 6); r++) {
+        if (motif.test(normaliser(texteCellule(ctx, cellule(ws, r, c))))) return c;
+      }
+    }
+    return 1;
+  }
+
+  function premierTexte(ctx, ws) {
+    if (!ws) return '';
+    const plage = plageFeuille(ws);
+    for (let r = plage.s.r; r <= Math.min(plage.e.r, plage.s.r + 9); r++) {
+      for (let c = plage.s.c; c <= Math.min(plage.e.c, plage.s.c + 9); c++) {
+        const v = valeurCellule(ctx, cellule(ws, r, c));
+        if (typeof v === 'string' && v.trim().length > 3) return v.trim();
+      }
+    }
+    return '';
+  }
+
+  /* --- TFT : lignes O1 à T1, méthode indirecte --- */
+  function lireTFT(ctx) {
+    const onglet = trouverOnglet(ctx, 'tft');
+    if (!onglet) return null;
+    const ws = onglet.ws;
+    const f = FORMAT_ATTENDU.codesTFT;
+    const ent = chercherLigneEntetes(ctx, ws, f.entetes, ['courant', 'precedent'], undefined, undefined);
+    if (!ent) {
+      ctx.ajouterProbleme('TFT', 'en-têtes', 'Ligne d’en-têtes introuvable dans l’onglet TFT : il faut les colonnes « 2027 » et « 2026 ».');
+      return null;
+    }
+    const col = ent.colonnes;
+    const cCode = colonneDesCodes(ctx, ws, ent.r, col, /^(O|I|F|D)\d+$|^(OT|IT|FT|OS|V|T0|T1)$/);
+    const cLib = col.libelle !== undefined ? col.libelle : cCode + 1;
+    const plage = plageFeuille(ws);
+    const lignes = [];
+    const parCode = objetSansPrototype();
+    let commence = false, fini = false, vides = 0;
+    for (let r = ent.r + 1; r <= plage.e.r && !fini; r++) {
+      const code = normaliser(texteCellule(ctx, cellule(ws, r, cCode)));
+      const libelle = texteCellule(ctx, cellule(ws, r, cLib));
+      if (!code && !libelle) { vides++; if (commence && vides > 3) break; continue; }
+      vides = 0;
+      if (code && COLONNES_INTERDITES.has(code)) continue;
+      if (code === f.premier) commence = true;
+      if (!commence) {
+        if (!code && libelle) lignes.push({ type: 'titre', code: '', libelle: libelle });
+        continue;
+      }
+      if (!code) {
+        if (normaliser(libelle).startsWith('TOTAL')) continue; /* ligne « Total » ajoutée : ignorée */
+        lignes.push({ type: 'titre', code: '', libelle: libelle });
+        continue;
+      }
+      if (parCode[code]) continue;
+      const v27 = nombreCellule(ctx, cellule(ws, r, col.courant));
+      const v26 = nombreCellule(ctx, cellule(ws, r, col.precedent));
+      const note = col.note !== undefined ? texteCellule(ctx, cellule(ws, r, col.note)) : '';
+      const type = f.totaux.includes(code) ? 'total' : (f.sousTotaux.includes(code) ? 'sous-total' : 'ligne');
+      const ligne = { type: type, code: code, libelle: libelle, v27: v27, v26: v26, note: note };
+      lignes.push(ligne);
+      parCode[code] = ligne;
+      if (code === f.dernier) fini = true;
+    }
+    /* On ne garde que les titres placés avant une ligne chiffrée. */
+    const premierIndex = lignes.findIndex(function (l) { return l.code === f.premier; });
+    const resultat = lignes.filter(function (l, i) { return l.type !== 'titre' || (i >= premierIndex - 1); });
+    for (const code of f.requis) {
+      if (!parCode[code]) ctx.ajouterProbleme('TFT', code, 'Code de ligne manquant : « ' + code + ' » dans l’onglet TFT (colonne B).');
+      else if (parCode[code].v27 === null) ctx.ajouterProbleme('TFT', code, 'La ligne « ' + code + ' » de l’onglet TFT n’a pas de montant 2027.');
+    }
+    return { lignes: resultat, parCode: parCode, titre: premierTexte(ctx, ws) };
+  }
+
+  /* --- KPI : section 1 (valeurs et feux), section 2 (dictionnaire), seuils --- */
+  function feuDepuisTexte(t) {
+    const n = normaliser(t);
+    if (n === 'VERT' || n === 'GREEN') return 'vert';
+    if (n === 'AMBRE' || n === 'ORANGE' || n === 'AMBER') return 'orange';
+    if (n === 'ROUGE' || n === 'RED') return 'rouge';
+    return 'aucun';
+  }
+  function nomCourt(nom) { return String(nom || '').replace(/\s*\([^()]*\)\s*$/, '').trim(); }
+  function formuleDepuisNom(nom) {
+    const m = /\(([^()]*)\)\s*$/.exec(String(nom || ''));
+    return m && /[÷+−×\-]/.test(m[1]) ? m[1].trim() : '';
+  }
+
+  function lireLignesCodes(ctx, ws, ent, motif) {
+    const cCode = colonneDesCodes(ctx, ws, ent.r, ent.colonnes, motif);
+    const plage = plageFeuille(ws);
+    const lignes = [];
+    let vides = 0, commence = false;
+    for (let r = ent.r + 1; r <= plage.e.r; r++) {
+      const code = normaliser(texteCellule(ctx, cellule(ws, r, cCode)));
+      if (motif.test(code)) { lignes.push({ r: r, code: code }); commence = true; vides = 0; continue; }
+      if (commence) { vides++; if (vides > 2) break; }
+    }
+    return lignes;
+  }
+
+  function lireKPI(ctx) {
+    const onglet = trouverOnglet(ctx, 'kpi');
+    if (!onglet) return null;
+    const ws = onglet.ws;
+    const fk = FORMAT_ATTENDU.codesKPI;
+    const ent = chercherLigneEntetes(ctx, ws, fk.entetes, ['courant', 'precedent', 'feuCourant']);
+    if (!ent) {
+      ctx.ajouterProbleme('KPI', 'en-têtes', 'Tableau des KPI introuvable dans l’onglet KPI : il faut les colonnes « 2027 », « 2026 » et « Feu 2027 ».');
+      return null;
+    }
+    const col = ent.colonnes;
+    const cLib = col.libelle !== undefined ? col.libelle : 2;
+    const liste = [];
+    const parCode = objetSansPrototype();
+    for (const l of lireLignesCodes(ctx, ws, ent, fk.motif)) {
+      if (parCode[l.code]) continue;
+      const nom = texteCellule(ctx, cellule(ws, l.r, cLib));
+      const nomDef = col.nomDefini !== undefined ? texteCellule(ctx, cellule(ws, l.r, col.nomDefini)) : '';
+      const k = {
+        code: l.code,
+        nom: nom,
+        nomCourt: nomCourt(nom),
+        formule: formuleDepuisNom(nom),
+        v27: nombreOuTexteCellule(ctx, cellule(ws, l.r, col.courant)),
+        v26: nombreOuTexteCellule(ctx, cellule(ws, l.r, col.precedent)),
+        variation: col.variation !== undefined ? nombreOuTexteCellule(ctx, cellule(ws, l.r, col.variation)) : null,
+        feu27: feuDepuisTexte(texteCellule(ctx, cellule(ws, l.r, col.feuCourant))),
+        feu26: col.feuPrecedent !== undefined ? feuDepuisTexte(texteCellule(ctx, cellule(ws, l.r, col.feuPrecedent))) : 'aucun',
+        unite: (nomDef.split('·')[1] || '').trim(),
+        dico: null,
+        seuil: null
+      };
+      liste.push(k);
+      parCode[l.code] = k;
+    }
+    for (const code of fk.requis) {
+      if (!parCode[code]) ctx.ajouterProbleme('KPI', code, 'Code de ligne manquant : « ' + code + ' » dans l’onglet KPI (colonne B).');
+    }
+    /* Dictionnaire */
+    const fd = FORMAT_ATTENDU.dictionnaire;
+    const entD = chercherLigneEntetes(ctx, ws, fd.entetes, ['definition']);
+    if (!entD) {
+      ctx.ajouterProbleme('KPI', 'dictionnaire', 'Dictionnaire des KPI introuvable dans l’onglet KPI : il faut la colonne « Définition ».');
+    } else {
+      const cd = entD.colonnes;
+      for (const l of lireLignesCodes(ctx, ws, entD, fk.motif)) {
+        const k = parCode[l.code];
+        if (!k || k.dico) continue;
+        const lire = function (cle) { return cd[cle] !== undefined ? texteCellule(ctx, cellule(ws, l.r, cd[cle])) : ''; };
+        k.dico = { definition: lire('definition'), unite: lire('unite'), vert: lire('vert'), ambre: lire('ambre'), rouge: lire('rouge'), pourquoi: lire('pourquoi') };
+        if (k.dico.unite) k.unite = k.dico.unite;
+      }
+    }
+    /* Seuils des feux */
+    const fs = FORMAT_ATTENDU.seuils;
+    const entS = chercherLigneEntetes(ctx, ws, fs.entetes, ['sens', 'vert']);
+    if (entS) {
+      const cs = entS.colonnes;
+      for (const l of lireLignesCodes(ctx, ws, entS, fk.motif)) {
+        const k = parCode[l.code];
+        if (!k || k.seuil) continue;
+        k.seuil = {
+          sens: normaliser(texteCellule(ctx, cellule(ws, l.r, cs.sens))).toLowerCase(),
+          vert: nombreCellule(ctx, cellule(ws, l.r, cs.vert)),
+          ambre: cs.ambre !== undefined ? nombreCellule(ctx, cellule(ws, l.r, cs.ambre)) : null
+        };
+      }
+    }
+    return { liste: liste, parCode: parCode, titre: premierTexte(ctx, ws), ws: ws };
+  }
+
+  /* --- KPI section 4 : données des graphiques --- */
+  function lireBlocGraphique(ctx, ws, def, cleTitre, colonnesRequises) {
+    const pos = chercherTitre(ctx, ws, def.titre);
+    if (!pos) { ctx.ajouterProbleme('KPI', cleTitre, 'Données du graphique « ' + cleTitre + ' » introuvables dans l’onglet KPI (section 4).'); return []; }
+    const carte = carteEntetes(ctx, ws, pos.r, def.entetes);
+    for (const k of colonnesRequises) {
+      if (carte[k] === undefined) { ctx.ajouterProbleme('KPI', cleTitre, 'Colonne manquante pour le graphique « ' + cleTitre + ' » (onglet KPI, section 4).'); return []; }
+    }
+    const lignes = [];
+    const plage = plageFeuille(ws);
+    for (let r = pos.r + 1; r <= plage.e.r; r++) {
+      const lib = texteCellule(ctx, cellule(ws, r, pos.c));
+      if (!lib) break;
+      if (COLONNES_INTERDITES.has(normaliser(lib))) continue;
+      const ligne = { libelle: lib.split(' · ')[0].trim(), libelleComplet: lib };
+      for (const k of Object.keys(def.entetes)) {
+        if (carte[k] === undefined) continue;
+        ligne[k] = (k === 'sens' || k === 'repere') ? texteCellule(ctx, cellule(ws, r, carte[k])) : nombreCellule(ctx, cellule(ws, r, carte[k]));
+      }
+      lignes.push(ligne);
+    }
+    if (!lignes.length) ctx.ajouterProbleme('KPI', cleTitre, 'Le graphique « ' + cleTitre + ' » n’a aucune ligne de données (onglet KPI, section 4).');
+    return lignes;
+  }
+  function lireGraphiques(ctx, ws) {
+    const g = FORMAT_ATTENDU.graphiques;
+    return {
+      radar: lireBlocGraphique(ctx, ws, g.radar, 'Radar', ['s27', 's26']),
+      entonnoir: lireBlocGraphique(ctx, ws, g.entonnoir, 'Entonnoir', ['valeur']),
+      cascade: lireBlocGraphique(ctx, ws, g.cascade, 'Cascade', ['debut', 'fin']),
+      jauges: lireBlocGraphique(ctx, ws, g.jauge, 'Jauge', ['valeur'])
+    };
+  }
+
+  /* --- KPI section 5 : décision du DG et recommandations --- */
+  function lireDecision(ctx, ws) {
+    const d = FORMAT_ATTENDU.decision;
+    const resultat = { bfr: [], recommandations: [], avertissement: '' };
+    const pos = chercherTitre(ctx, ws, d.titre);
+    if (!pos) { ctx.ajouterProbleme('KPI', 'section 5', 'Tableau « Poste du cycle de cash » introuvable dans l’onglet KPI (section 5).'); return resultat; }
+    const carte = carteEntetes(ctx, ws, pos.r, d.entetes);
+    const plage = plageFeuille(ws);
+    let r = pos.r + 1;
+    for (; r <= plage.e.r; r++) {
+      const lib = texteCellule(ctx, cellule(ws, r, pos.c));
+      if (!lib) break;
+      resultat.bfr.push({
+        poste: lib,
+        valeur: carte.valeur !== undefined ? nombreCellule(ctx, cellule(ws, r, carte.valeur)) : null,
+        seuilVert: carte.seuilVert !== undefined ? nombreCellule(ctx, cellule(ws, r, carte.seuilVert)) : null,
+        ecart: carte.ecart !== undefined ? nombreCellule(ctx, cellule(ws, r, carte.ecart)) : null
+      });
+    }
+    for (; r <= plage.e.r; r++) {
+      for (let c = plage.s.c; c <= Math.min(plage.e.c, plage.s.c + 12); c++) {
+        const t = texteCellule(ctx, cellule(ws, r, c));
+        if (!t) continue;
+        if (/^\d+\s*[.)]\s+\S/.test(t) && t.length > 20 && resultat.recommandations.length < d.nombreRecommandations) resultat.recommandations.push(t);
+        else if (resultat.recommandations.length && !resultat.avertissement && t.length > 20) resultat.avertissement = t;
+      }
+    }
+    return resultat;
+  }
+
+  function lireMessagePrincipal(ctx) {
+    const o = trouverOnglet(ctx, 'lisezMoi');
+    if (!o) return '';
+    const pos = chercherTitre(ctx, o.ws, FORMAT_ATTENDU.messagePrincipal.titre);
+    if (!pos) { ctx.ajouterProbleme('LISEZ-MOI', 'message principal', 'Le titre « Le message principal » est introuvable dans l’onglet LISEZ-MOI.'); return ''; }
+    for (let r = pos.r + 1; r <= pos.r + 5; r++) {
+      const t = texteCellule(ctx, cellule(o.ws, r, pos.c));
+      if (t) return t;
+    }
+    ctx.ajouterProbleme('LISEZ-MOI', 'message principal', 'Le message principal est vide dans l’onglet LISEZ-MOI.');
+    return '';
+  }
+
+  function lireControles(ctx) {
+    const o = trouverOnglet(ctx, 'controles');
+    const res = { total: null, conformes: null };
+    if (!o) return res;
+    const def = FORMAT_ATTENDU.controles;
+    const plage = plageFeuille(o.ws);
+    for (let r = plage.s.r; r <= Math.min(plage.e.r, plage.s.r + 40); r++) {
+      for (let c = plage.s.c; c <= Math.min(plage.e.c, plage.s.c + 8); c++) {
+        const t = normaliser(texteCellule(ctx, cellule(o.ws, r, c)));
+        if (!t) continue;
+        const cle = def.total.some(function (s) { return normaliser(s) === t; }) ? 'total' : (def.conformes.some(function (s) { return normaliser(s) === t; }) ? 'conformes' : null);
+        if (!cle || res[cle] !== null) continue;
+        for (let c2 = c + 1; c2 <= c + 4; c2++) {
+          const n = nombreCellule(ctx, cellule(o.ws, r, c2));
+          if (n !== null) { res[cle] = n; break; }
+        }
+      }
+    }
+    return res;
+  }
+
+  function compterCellulesEnErreur(classeur) {
+    const parOnglet = [];
+    let total = 0;
+    for (const nom of classeur.SheetNames || []) {
+      const ws = classeur.Sheets[nom];
+      if (!ws) continue;
+      let n = 0;
+      for (const cle of Object.keys(ws)) {
+        if (cle.charAt(0) === '!') continue;
+        const c = ws[cle];
+        if (c && c.t === 'e') n++;
+      }
+      if (n) { parOnglet.push(nom + ' (' + n + ')'); total += n; }
+    }
+    return { total: total, parOnglet: parOnglet };
+  }
+
+  /* Lecture complète et validation de la structure, via FORMAT_ATTENDU. */
+  function extraireModele(classeur) {
+    const ctx = creerContexte(classeur);
+    for (const cle of Object.keys(FORMAT_ATTENDU.onglets)) {
+      const def = FORMAT_ATTENDU.onglets[cle];
+      if (def.requis && !trouverOnglet(ctx, cle)) ctx.ajouterProbleme(def.nom, 'onglet', 'Onglet manquant : « ' + def.nom + ' ».');
+    }
+    indexerNoms(ctx);
+    const noms = objetSansPrototype();
+    for (const def of FORMAT_ATTENDU.nomsDefinis) noms[def.nom] = lireNomDefini(ctx, def);
+    const tft = lireTFT(ctx);
+    const kpi = lireKPI(ctx);
+    const graphiques = kpi ? lireGraphiques(ctx, kpi.ws) : { radar: [], entonnoir: [], cascade: [], jauges: [] };
+    const decision = kpi ? lireDecision(ctx, kpi.ws) : { bfr: [], recommandations: [], avertissement: '' };
+    const message = lireMessagePrincipal(ctx);
+    const controles = lireControles(ctx);
+    const ongletDash = trouverOnglet(ctx, 'dashboard');
+    const erreursCellules = compterCellulesEnErreur(classeur);
+
+    if (ctx.problemes.length) throw new ErreurStructure(ctx.problemes);
+
+    /* Les valeurs des KPI viennent des noms définis (ils priment sur le tableau). */
+    const kpis = kpi.liste.map(function (k) {
+      const defs = FORMAT_ATTENDU.nomsDefinis.filter(function (d) { return d.code === k.code; });
+      const d27 = defs.find(function (d) { return /_2027$/.test(d.nom); });
+      const d26 = defs.find(function (d) { return /_2026$/.test(d.nom); });
+      const copie = Object.assign(objetSansPrototype(), k);
+      if (d27 && noms[d27.nom] !== null) copie.v27 = noms[d27.nom];
+      if (d26 && noms[d26.nom] !== null) copie.v26 = noms[d26.nom];
+      copie.nomDefini = d27 ? d27.nom : '';
+      return copie;
+    });
+    const flux = objetSansPrototype();
+    for (const code of ['OT', 'IT', 'FT', 'V', 'T0', 'T1']) {
+      flux[code] = { v27: noms['TFT_' + code + '_2027'], v26: noms['TFT_' + code + '_2026'] };
+    }
+    const params = objetSansPrototype();
+    for (const def of FORMAT_ATTENDU.nomsDefinis) if (/^PARAM_/.test(def.nom)) params[def.nom] = noms[def.nom];
+
+    return {
+      modele: {
+        titre: premierTexte(ctx, ongletDash ? ongletDash.ws : null) || kpi.titre || tft.titre,
+        message: message,
+        statut: String(noms.STATUT_GLOBAL || ''),
+        controles: controles,
+        flux: flux,
+        tft: tft.lignes,
+        kpis: kpis,
+        params: params,
+        graphiques: graphiques,
+        bfr: decision.bfr,
+        recommandations: decision.recommandations,
+        avertissementRecos: decision.avertissement
+      },
+      cellulesEnErreur: erreursCellules
+    };
+  }
+
+  /* Décodage d'un CSV : UTF-8 si possible, sinon Windows-1252. */
+  function decoderTexteCSV(octets) {
+    let texte;
+    try { texte = new TextDecoder('utf-8', { fatal: true }).decode(octets); }
+    catch (e) { texte = new TextDecoder('windows-1252').decode(octets); }
+    return texte.replace(/^﻿/, '');
+  }
+
+  /* Lecture binaire du classeur : valeurs seulement, aucune macro exécutée. */
+  function lireClasseur(octets, ext) {
+    if (!window.XLSX || typeof window.XLSX.read !== 'function') {
+      throw new ErreurLecture('La bibliothèque de lecture Excel n’a pas pu être chargée : vérifiez la connexion Internet puis rechargez la page.');
+    }
+    let classeur;
+    try {
+      const options = { cellFormula: true, cellHTML: false, cellText: false, cellStyles: false, cellDates: true, bookVBA: false, bookFiles: false, WTF: false, dense: false };
+      if (ext === '.csv') {
+        options.type = 'string';
+        classeur = window.XLSX.read(decoderTexteCSV(octets), options);
+      } else {
+        options.type = 'array';
+        classeur = window.XLSX.read(octets, options);
+      }
+    } catch (e) {
+      throw new ErreurLecture('Le fichier est incomplet ou endommagé : il n’a pas pu être lu.');
+    }
+    if (!classeur || !Array.isArray(classeur.SheetNames) || !classeur.SheetNames.length) {
+      throw new ErreurLecture('Le fichier ne contient aucun onglet lisible.');
+    }
+    let lignes = 0;
+    for (const nom of classeur.SheetNames) {
+      const p = plageFeuille(classeur.Sheets[nom]);
+      lignes += Math.max(0, p.e.r - p.s.r + 1);
+    }
+    if (lignes > LIMITES.lignesMax) {
+      throw new ErreurSecurite('Fichier refusé : ' + formatNombre(lignes, 0) + ' lignes pour un maximum de 50 000.');
+    }
+    if (ext === '.csv') {
+      throw new ErreurStructure([{ onglet: 'CSV', element: 'onglets', message: 'Un fichier .csv ne contient qu’un seul onglet et aucun nom défini : utilisez le classeur complet (.xlsx), avec ses onglets TFT, KPI, CONTROLES et LISEZ-MOI.' }]);
+    }
+    return classeur;
+  }
+
+  /* =======================================================================
+     4. SYNCHRONISATION · Excel ↔ application (3 modes, choisis tout seuls)
+     ======================================================================= */
+
+  const etat = {
+    mode: null,                 /* 'A' direct · 'B' en ligne · 'C' import */
+    poignee: null,
+    poigneeEnAttente: null,
+    fichierNom: '',
+    derniereMaj: null,
+    derniereVerif: 0,
+    syncActive: true,
+    statut: 'aucun',            /* aucun · lecture · ok · reconnexion · illisible */
+    raison: '',
+    signature: null,            /* mode A : date + taille */
+    empreinteOctets: '',        /* mode B : empreinte des octets */
+    empreinteModele: '',
+    modele: null,
+    problemes: [],
+    avertissements: [],
+    occupe: false,
+    relancer: false,
+    premiereLecture: true,
+    erreurInitiale: ''
+  };
+
+  const API_DIRECTE = typeof window.showOpenFilePicker === 'function';
+  const PROTOCOLE_WEB = location.protocol === 'http:' || location.protocol === 'https:';
+  const EST_LOCALHOST = ['localhost', '127.0.0.1', '[::1]', '::1'].includes(location.hostname);
+
+  function intervalleMode() {
+    if (etat.mode === 'A') return INTERVALLES.direct;
+    if (etat.mode === 'B') return EST_LOCALHOST ? INTERVALLES.localhost : INTERVALLES.enLigne;
+    return Infinity;
+  }
+  function libelleMode() {
+    if (etat.mode === 'A') return 'Direct';
+    if (etat.mode === 'B') return 'En ligne';
+    if (etat.mode === 'C') return 'Import';
+    return '—';
+  }
+  function pause(ms) { return new Promise(function (ok) { setTimeout(ok, ms); }); }
+
+  /* Préférence de l'interrupteur (seule donnée gardée dans localStorage). */
+  function lirePreferenceSync() {
+    try { const v = localStorage.getItem(CLE_SYNC); return v === null ? true : v === '1'; } catch (e) { return true; }
+  }
+  function ecrirePreferenceSync(v) {
+    try { localStorage.setItem(CLE_SYNC, v ? '1' : '0'); } catch (e) { /* navigation privée : on continue */ }
+  }
+
+  /* IndexedDB : on garde la poignée du fichier, jamais son contenu. */
+  function ouvrirBase() {
+    return new Promise(function (ok, ko) {
+      try {
+        if (!window.indexedDB) { ko(new Error('indisponible')); return; }
+        const req = indexedDB.open(BASE_IDB, 1);
+        req.onupgradeneeded = function () { req.result.createObjectStore(MAGASIN_IDB); };
+        req.onsuccess = function () { ok(req.result); };
+        req.onerror = function () { ko(req.error); };
+      } catch (e) { ko(e); }
+    });
+  }
+  async function idb(operation, valeur) {
+    try {
+      const base = await ouvrirBase();
+      return await new Promise(function (ok, ko) {
+        const tx = base.transaction(MAGASIN_IDB, operation === 'lire' ? 'readonly' : 'readwrite');
+        const magasin = tx.objectStore(MAGASIN_IDB);
+        const req = operation === 'lire' ? magasin.get(CLE_POIGNEE) : (operation === 'ecrire' ? magasin.put(valeur, CLE_POIGNEE) : magasin.delete(CLE_POIGNEE));
+        req.onsuccess = function () { ok(req.result); };
+        req.onerror = function () { ko(req.error); };
+        tx.oncomplete = function () { base.close(); };
+      });
+    } catch (e) { return null; }
+  }
+
+  async function empreinteSHA256(donnees) {
+    const octets = typeof donnees === 'string' ? new TextEncoder().encode(donnees) : donnees;
+    if (window.crypto && crypto.subtle && typeof crypto.subtle.digest === 'function') {
+      try {
+        const h = await crypto.subtle.digest('SHA-256', octets);
+        return Array.from(new Uint8Array(h)).map(function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+      } catch (e) { /* repli ci-dessous */ }
+    }
+    let h1 = 0x811c9dc5, h2 = 0;
+    for (let i = 0; i < octets.length; i++) { h1 ^= octets[i]; h1 = Math.imul(h1, 16777619) >>> 0; h2 = (h2 + octets[i] * (i + 1)) >>> 0; }
+    return 'fnv' + h1.toString(16) + h2.toString(16) + octets.length;
+  }
+
+  function changerStatut(statut, raison) {
+    etat.statut = statut;
+    etat.raison = raison || '';
+    afficherSync();
+  }
+
+  /* Traite un fichier lu : sécurité → lecture → validation → remplacement. */
+  async function traiterOctets(octets, nom, taille) {
+    const ext = verifierFichier(nom, taille, octets);
+    const classeur = lireClasseur(octets, ext);
+    const resultat = extraireModele(classeur);
+    const modele = resultat.modele;
+    const empreinte = await empreinteSHA256(JSON.stringify(modele));
+    const avertissements = [];
+    if (resultat.cellulesEnErreur.total) {
+      avertissements.push(resultat.cellulesEnErreur.total + ' cellule(s) en erreur (#N/A, #DIV/0!…) traitée(s) comme vide(s) : ' + resultat.cellulesEnErreur.parOnglet.join(', ') + '.');
+    }
+    etat.avertissements = avertissements;
+    etat.problemes = [];
+    etat.fichierNom = nom;
+    etat.erreurInitiale = '';
+    const ancien = etat.modele;
+    if (empreinte === etat.empreinteModele) {
+      changerStatut('ok');
+      afficherAlertes();
+      return;
+    }
+    etat.modele = modele;
+    etat.empreinteModele = empreinte;
+    etat.derniereMaj = new Date();
+    changerStatut('ok');
+    const changements = ancien ? compterChangements(ancien, modele) : null;
+    rendre({ conserverDefilement: true });
+    if (ancien) {
+      toast('Données mises à jour à ' + heureCourte(etat.derniereMaj) + ' : ' + changements.total + ' valeur' + (changements.total > 1 ? 's modifiées' : ' modifiée'), 'succes');
+      illuminerKPI(changements.kpis);
+    } else {
+      toast('Données chargées : ' + nom, 'succes');
+    }
+  }
+
+  /* Gestion uniforme des erreurs : les dernières données valides restent. */
+  function signalerErreur(e) {
+    if (e instanceof ErreurStructure) {
+      etat.problemes = e.problemes;
+      const premier = e.problemes[0];
+      changerStatut('illisible', premier ? premier.message : 'Structure non conforme.');
+    } else if (e instanceof ErreurSecurite || e instanceof ErreurLecture) {
+      etat.problemes = [{ onglet: '', element: '', message: e.message }];
+      changerStatut('illisible', e.message);
+    } else {
+      etat.problemes = [{ onglet: '', element: '', message: 'Le fichier n’a pas pu être lu.' }];
+      changerStatut('illisible', 'Le fichier n’a pas pu être lu.');
+    }
+    if (!etat.modele) etat.erreurInitiale = etat.raison;
+    afficherAlertes();
+    if (!etat.modele) rendre();
+  }
+
+  /* --- Mode A · Direct : File System Access, lecture seule --- */
+  async function verifierModeA() {
+    const poignee = etat.poignee;
+    if (!poignee) return;
+    let fichier;
+    try { fichier = await poignee.getFile(); }
+    catch (e) { gererErreurPoignee(e); return; }
+    if (etat.signature && etat.signature.date === fichier.lastModified && etat.signature.taille === fichier.size) {
+      if (etat.statut === 'reconnexion' || etat.statut === 'lecture') changerStatut('ok');
+      return;
+    }
+    changerStatut('lecture');
+    /* Pendant l'enregistrement d'Excel : attendre que date et taille soient stables. */
+    let stable = null;
+    for (let essai = 0; essai < 10 && !stable; essai++) {
+      await pause(ATTENTE_ENREGISTREMENT);
+      let f2;
+      try { f2 = await poignee.getFile(); } catch (e) { gererErreurPoignee(e); return; }
+      if (f2.lastModified === fichier.lastModified && f2.size === fichier.size) stable = f2;
+      else fichier = f2;
+    }
+    if (!stable) stable = fichier;
+    let derniereErreur = null;
+    for (let tentative = 0; tentative <= REPRISES; tentative++) {
+      try {
+        const f = tentative === 0 ? stable : await poignee.getFile();
+        const octets = new Uint8Array(await f.arrayBuffer());
+        etat.signature = { date: f.lastModified, taille: f.size };
+        await traiterOctets(octets, f.name, f.size);
+        return;
+      } catch (e) {
+        derniereErreur = e;
+        const reprenable = e instanceof ErreurLecture || (e && e.name === 'NotReadableError');
+        if (!reprenable || tentative === REPRISES) break;
+        await pause(DELAI_REPRISE);
+      }
+    }
+    if (derniereErreur && derniereErreur.name === 'NotReadableError') {
+      signalerErreur(new ErreurLecture('Fichier illisible pour le moment : Excel est peut-être encore en train de l’enregistrer.'));
+    } else if (derniereErreur && (derniereErreur.name === 'NotFoundError' || derniereErreur.name === 'NotAllowedError' || derniereErreur.name === 'SecurityError')) {
+      gererErreurPoignee(derniereErreur);
+    } else {
+      signalerErreur(derniereErreur);
+    }
+  }
+  function gererErreurPoignee(e) {
+    const nom = e && e.name;
+    let raison = 'Le fichier n’est plus accessible.';
+    if (nom === 'NotFoundError') raison = 'Fichier introuvable : il a peut-être été déplacé, renommé ou supprimé.';
+    else if (nom === 'NotAllowedError' || nom === 'SecurityError') raison = 'L’autorisation de lire le fichier a été retirée.';
+    else if (nom === 'NotReadableError') raison = 'Le fichier n’est pas lisible pour le moment (ordinateur sorti de veille ?).';
+    changerStatut('reconnexion', raison);
+  }
+
+  /* --- Mode B · En ligne : relecture de donnees.xlsx --- */
+  async function verifierModeB(silencieux) {
+    let reponse;
+    try {
+      reponse = await fetch(NOM_FICHIER_EN_LIGNE, { cache: 'no-cache', credentials: 'same-origin', redirect: 'error' });
+    } catch (e) {
+      if (!etat.modele && !silencieux) { etat.mode = API_DIRECTE ? null : 'C'; changerStatut('aucun'); rendre(); }
+      return false;
+    }
+    if (!reponse.ok) {
+      if (!etat.modele) { etat.mode = API_DIRECTE ? null : 'C'; changerStatut('aucun'); rendre(); }
+      return false;
+    }
+    const longueur = Number(reponse.headers.get('content-length') || 0);
+    if (longueur > LIMITES.tailleMax) { signalerErreur(new ErreurSecurite('Fichier refusé : ' + formatTaille(longueur) + ' pour un maximum de 10 Mo.')); return true; }
+    const octets = new Uint8Array(await reponse.arrayBuffer());
+    const empreinte = await empreinteSHA256(octets);
+    if (empreinte === etat.empreinteOctets) { if (etat.statut === 'lecture') changerStatut('ok'); return true; }
+    if (etat.statut !== 'reconnexion') changerStatut('lecture');
+    try {
+      await traiterOctets(octets, NOM_FICHIER_EN_LIGNE, octets.length);
+      etat.empreinteOctets = empreinte;
+    } catch (e) {
+      etat.empreinteOctets = empreinte;
+      signalerErreur(e);
+    }
+    if (etat.poigneeEnAttente) changerStatut('reconnexion', 'Le navigateur demande à nouveau l’autorisation de lire « ' + (etat.poigneeEnAttente.name || 'votre fichier') + ' ».');
+    return true;
+  }
+
+  /* --- Boucle de vérification unique (pas de chevauchement) --- */
+  async function verifierMaintenant() {
+    if (etat.occupe) { etat.relancer = true; return; }
+    etat.occupe = true;
+    try {
+      do {
+        etat.relancer = false;
+        etat.derniereVerif = Date.now();
+        if (etat.mode === 'A') await verifierModeA();
+        else if (etat.mode === 'B') await verifierModeB(true);
+      } while (etat.relancer && etat.syncActive);
+    } catch (e) {
+      signalerErreur(e);
+    } finally {
+      etat.occupe = false;
+    }
+  }
+  function battement() {
+    mettreAJourHorloge();
+    if (!etat.syncActive || document.hidden) return;
+    if (etat.mode !== 'A' && etat.mode !== 'B') return;
+    if (etat.mode === 'A' && etat.statut === 'reconnexion') return;
+    if (Date.now() - etat.derniereVerif >= intervalleMode()) verifierMaintenant();
+  }
+
+  /* --- Actions de l'utilisateur --- */
+  async function connecterFichier() {
+    if (!API_DIRECTE) { ouvrirImport(); return; }
+    let poignees;
+    try {
+      poignees = await window.showOpenFilePicker({
+        multiple: false,
+        excludeAcceptAllOption: false,
+        types: [{ description: 'Classeur Excel', accept: {
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['.xlsx'],
+          'application/vnd.ms-excel.sheet.macroEnabled.12': ['.xlsm'],
+          'application/vnd.ms-excel': ['.xls'],
+          'text/csv': ['.csv']
+        } }]
+      });
+    } catch (e) {
+      if (e && e.name === 'AbortError') return; /* l'utilisateur a annulé */
+      ouvrirImport();
+      return;
+    }
+    if (poignees && poignees[0]) await brancherPoignee(poignees[0]);
+  }
+  async function brancherPoignee(poignee) {
+    const ext = extensionDe(poignee.name);
+    if (!EXTENSIONS.includes(ext)) {
+      signalerErreur(new ErreurSecurite('Format refusé : seuls les fichiers .xlsx, .xlsm, .xls et .csv sont acceptés.'));
+      return;
+    }
+    etat.poignee = poignee;
+    etat.poigneeEnAttente = null;
+    etat.mode = 'A';
+    etat.signature = null;
+    etat.fichierNom = poignee.name;
+    await idb('ecrire', poignee);
+    changerStatut('lecture');
+    etat.derniereVerif = 0;
+    await verifierMaintenant();
+  }
+  async function reconnecter() {
+    const poignee = etat.poigneeEnAttente || etat.poignee;
+    if (!poignee) { await connecterFichier(); return; }
+    try {
+      let perm = 'granted';
+      if (typeof poignee.queryPermission === 'function') perm = await poignee.queryPermission({ mode: 'read' });
+      if (perm !== 'granted' && typeof poignee.requestPermission === 'function') perm = await poignee.requestPermission({ mode: 'read' });
+      if (perm !== 'granted') { changerStatut('reconnexion', 'Autorisation refusée : cliquez à nouveau sur « Reconnecter » et choisissez « Autoriser ».'); return; }
+      await poignee.getFile();
+    } catch (e) {
+      if (e && e.name === 'NotFoundError') { await connecterFichier(); return; }
+      gererErreurPoignee(e);
+      return;
+    }
+    etat.poignee = poignee;
+    etat.poigneeEnAttente = null;
+    etat.mode = 'A';
+    etat.signature = null;
+    changerStatut('lecture');
+    etat.derniereVerif = 0;
+    await verifierMaintenant();
+  }
+  function ouvrirImport() {
+    const entree = document.getElementById('choix-fichier');
+    entree.value = '';
+    entree.click();
+  }
+  async function importerFichier(fichier) {
+    if (!fichier) return;
+    etat.mode = 'C';
+    etat.poigneeEnAttente = null;
+    changerStatut('lecture');
+    try {
+      verifierFichier(fichier.name, fichier.size, null);
+      const octets = new Uint8Array(await fichier.arrayBuffer());
+      await traiterOctets(octets, fichier.name, fichier.size);
+    } catch (e) {
+      signalerErreur(e);
+    }
+  }
+  function basculerSync() {
+    etat.syncActive = !etat.syncActive;
+    ecrirePreferenceSync(etat.syncActive);
+    afficherSync();
+    if (etat.syncActive) { etat.derniereVerif = 0; verifierMaintenant(); toast('Synchronisation activée : vérification immédiate.', 'info'); }
+    else toast('Synchronisation en pause : les données affichées restent figées.', 'info');
+  }
+  async function effacerDonnees() {
+    await idb('supprimer');
+    try { localStorage.removeItem(CLE_SYNC); } catch (e) { /* rien */ }
+    etat.poignee = null;
+    etat.poigneeEnAttente = null;
+    etat.signature = null;
+    if (etat.mode === 'A') etat.mode = PROTOCOLE_WEB ? 'B' : (etat.modele ? 'C' : null);
+    if (etat.statut === 'reconnexion') changerStatut(etat.modele ? 'ok' : 'aucun');
+    afficherSync();
+    toast('Le fichier connecté et vos préférences ont été effacés de ce navigateur.', 'info');
+  }
+
+  /* =======================================================================
+     5. CALCULS · une fonction simple par calcul, facile à vérifier
+     ======================================================================= */
+
+  function estNombre(v) { return typeof v === 'number' && Number.isFinite(v); }
+  function ligneTFT(m, code) { return m.tft.find(function (l) { return l.code === code; }) || { v27: null, v26: null }; }
+  function valeurTFT(m, code, an) { const l = ligneTFT(m, code); return an === 2027 ? l.v27 : l.v26; }
+  function kpiParCode(m, code) { return m.kpis.find(function (k) { return k.code === code; }) || null; }
+
+  /* K03 · Free cash-flow avant loyers = OT + I1 + I2 */
+  function calculerFCF(m, an) { return valeurTFT(m, 'OT', an) + valeurTFT(m, 'I1', an) + valeurTFT(m, 'I2', an); }
+  /* K04 · Free cash-flow après loyers = K03 + F4 + F5 */
+  function calculerFCFApresLoyers(m, an) { return calculerFCF(m, an) + valeurTFT(m, 'F4', an) + valeurTFT(m, 'F5', an); }
+  /* K13 · Couverture du service de la dette = OT ÷ (remboursements + intérêts + loyers) */
+  function calculerDSCR(m, an) {
+    const service = -(valeurTFT(m, 'F2', an) + valeurTFT(m, 'F3', an) + valeurTFT(m, 'F4', an) + valeurTFT(m, 'F5', an));
+    return service ? valeurTFT(m, 'OT', an) / service : null;
+  }
+  /* K14 · Couverture des dividendes = K03 ÷ dividendes versés */
+  function calculerCouvertureDividendes(m, an) { const div = -valeurTFT(m, 'F6', an); return div ? calculerFCF(m, an) / div : null; }
+  /* EBITDA 2027 : première étape de l'entonnoir (KPI, section 4) */
+  function ebitda2027(m) { const e = m.graphiques.entonnoir[0]; return e && estNombre(e.valeur) ? e.valeur : null; }
+  /* K01 · Conversion de l'EBITDA en cash = OT ÷ EBITDA */
+  function calculerConversion(m) { const e = ebitda2027(m); return e ? valeurTFT(m, 'OT', 2027) / e : null; }
+  /* K11 · Dette nette ÷ EBITDA = K10 ÷ EBITDA */
+  function calculerLevier(m) { const e = ebitda2027(m); const dn = kpiParCode(m, 'K10'); return e && dn && estNombre(dn.v27) ? dn.v27 / e : null; }
+  /* K09 · Cycle de cash = K06 + K07 − K08 */
+  function calculerCycleCash(m, an) {
+    const cle = an === 2027 ? 'v27' : 'v26';
+    const a = kpiParCode(m, 'K06'), b = kpiParCode(m, 'K07'), c = kpiParCode(m, 'K08');
+    return a && b && c && estNombre(a[cle]) && estNombre(b[cle]) && estNombre(c[cle]) ? a[cle] + b[cle] - c[cle] : null;
+  }
+  /* V = OT + IT + FT ; T1 = T0 + V */
+  function calculerVariation(m, an) { return valeurTFT(m, 'OT', an) + valeurTFT(m, 'IT', an) + valeurTFT(m, 'FT', an); }
+  function calculerTresorerieCloture(m, an) { return valeurTFT(m, 'T0', an) + valeurTFT(m, 'V', an); }
+
+  /* Vérification interne : chaque valeur affichée est comparée à un calcul refait. */
+  function verifierCalculs(m) {
+    const k = function (code, an) { const x = kpiParCode(m, code); return x ? (an === 2027 ? x.v27 : x.v26) : null; };
+    const f = function (code, an) { return m.flux[code] ? (an === 2027 ? m.flux[code].v27 : m.flux[code].v26) : null; };
+    const controles = [
+      ['K01 Conversion en cash 2027', calculerConversion(m), k('K01', 2027)],
+      ['K03 Free cash-flow 2027', calculerFCF(m, 2027), k('K03', 2027)],
+      ['K03 Free cash-flow 2026', calculerFCF(m, 2026), k('K03', 2026)],
+      ['K04 Free cash-flow après loyers 2027', calculerFCFApresLoyers(m, 2027), k('K04', 2027)],
+      ['K09 Cycle de cash 2027', calculerCycleCash(m, 2027), k('K09', 2027)],
+      ['K09 Cycle de cash 2026', calculerCycleCash(m, 2026), k('K09', 2026)],
+      ['K11 Dette nette ÷ EBITDA 2027', calculerLevier(m), k('K11', 2027)],
+      ['K13 Couverture de la dette 2027', calculerDSCR(m, 2027), k('K13', 2027)],
+      ['K13 Couverture de la dette 2026', calculerDSCR(m, 2026), k('K13', 2026)],
+      ['K14 Couverture des dividendes 2027', calculerCouvertureDividendes(m, 2027), k('K14', 2027)],
+      ['K14 Couverture des dividendes 2026', calculerCouvertureDividendes(m, 2026), k('K14', 2026)],
+      ['V Variation de la trésorerie 2027', calculerVariation(m, 2027), f('V', 2027)],
+      ['T1 Trésorerie nette à la clôture 2027', calculerTresorerieCloture(m, 2027), f('T1', 2027)]
+    ];
+    return controles.map(function (c) {
+      const ok = !estNombre(c[1]) || !estNombre(c[2]) || Math.abs(c[1] - c[2]) <= Math.max(0.5, Math.abs(c[2]) * 1e-6) || (Math.abs(c[2]) < 1000 && Math.abs(c[1] - c[2]) < 0.005);
+      return { nom: c[0], calcule: c[1], fichier: c[2], ok: ok };
+    });
+  }
+
+  /* Feu le plus sévère d'une famille. */
+  function feuFamille(m, famille) {
+    let pire = 'aucun';
+    for (const code of famille.kpis) {
+      const k = kpiParCode(m, code);
+      if (k && FEUX[k.feu27].rang > FEUX[pire].rang) pire = k.feu27;
+    }
+    return pire;
+  }
+  function familleDuKPI(code) { return FAMILLES.find(function (f) { return f.kpis.includes(code); }) || null; }
+
+  /* Repli si les recommandations manquent : règles simples, aucune IA. */
+  function pointsAttention(m) {
+    const points = [];
+    const k = function (code) { const x = kpiParCode(m, code); return x && estNombre(x.v27) ? x.v27 : null; };
+    const p = m.params;
+    if (k('K03') !== null && k('K03') <= 0) points.push('Le free cash-flow 2027 est négatif (' + formatValeur(k('K03'), 'DH') + ') : les investissements dépassent le cash d’exploitation.');
+    if (k('K11') !== null && estNombre(p.PARAM_PLAFOND) && k('K11') > p.PARAM_PLAFOND) points.push('La dette nette vaut ' + formatValeur(k('K11'), 'fois') + ' l’EBITDA, au-dessus du plafond bancaire de ' + formatNombre(p.PARAM_PLAFOND, 2) + '.');
+    if (k('K14') !== null && k('K14') < 1) points.push('Le dividende n’est pas couvert par le cash libre : couverture de ' + formatValeur(k('K14'), 'fois') + '.');
+    if (k('K13') !== null && estNombre(p.PARAM_CIBLE_DSCR) && k('K13') < p.PARAM_CIBLE_DSCR) points.push('La couverture du service de la dette (' + formatValeur(k('K13'), 'fois') + ') est sous son seuil de ' + formatNombre(p.PARAM_CIBLE_DSCR, 2) + '.');
+    if (k('K09') !== null && estNombre(p.PARAM_CIBLE_CCC) && k('K09') > p.PARAM_CIBLE_CCC) points.push('Le cycle de cash (' + formatValeur(k('K09'), 'jours') + ') dépasse la cible de ' + formatNombre(p.PARAM_CIBLE_CCC, 0) + ' jours.');
+    if (k('K01') !== null && estNombre(p.PARAM_CIBLE_CONV) && k('K01') >= p.PARAM_CIBLE_CONV) points.push('La conversion de l’EBITDA en cash (' + formatValeur(k('K01'), 'ratio') + ') atteint la cible de ' + formatNombre(p.PARAM_CIBLE_CONV, 2) + '.');
+    return points.slice(0, 3);
+  }
+
+  /* Résumé du changement : nombre de valeurs modifiées et KPI touchés. */
+  function aplatir(objet, prefixe, sortie) {
+    if (objet === null || typeof objet !== 'object') { sortie.set(prefixe, objet); return sortie; }
+    for (const cle of Object.keys(objet)) aplatir(objet[cle], prefixe ? prefixe + '.' + cle : cle, sortie);
+    return sortie;
+  }
+  function compterChangements(ancien, nouveau) {
+    const a = aplatir(ancien, '', new Map()), b = aplatir(nouveau, '', new Map());
+    let total = 0;
+    const cles = new Set(Array.from(a.keys()).concat(Array.from(b.keys())));
+    for (const c of cles) if (a.get(c) !== b.get(c)) total++;
+    const kpis = [];
+    for (const kn of nouveau.kpis) {
+      const ka = ancien.kpis.find(function (x) { return x.code === kn.code; });
+      if (!ka || ka.v27 !== kn.v27 || ka.v26 !== kn.v26 || ka.feu27 !== kn.feu27 || ka.feu26 !== kn.feu26) kpis.push(kn.code);
+    }
+    return { total: total, kpis: kpis };
+  }
+
+  /* =======================================================================
+     6. AFFICHAGE
+     ======================================================================= */
+
+  const reduireAnimations = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const ecranMobile = window.matchMedia('(max-width: 1023px)');
+  const famillesDepliees = new Map(); /* id → ouverte (true/false), choix de l'utilisateur */
+  let premierAffichageVue = '';
+
+  /* --- Nombres à la française : espace pour les milliers, virgule, signe − --- */
+  function formatNombre(n, decimales) {
+    if (!estNombre(n)) return String(n === null || n === undefined ? '—' : n);
+    const negatif = n < 0 && Math.abs(n) >= 0.5 * Math.pow(10, -decimales);
+    const fixe = Math.abs(n).toFixed(decimales);
+    const parts = fixe.split('.');
+    const entier = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    return (negatif ? '− ' : '') + entier + (parts[1] ? ',' + parts[1] : '');
+  }
+  function typeUnite(unite) {
+    const u = normaliser(unite);
+    if (u === 'DH' || u === 'MAD' || u === 'DHS') return 'montant';
+    if (u.startsWith('JOUR')) return 'jours';
+    if (u === 'FOIS' || u === 'X') return 'fois';
+    return 'ratio';
+  }
+  function partiesValeur(v, unite) {
+    if (!estNombre(v)) return { nombre: v === null || v === undefined ? '—' : String(v), unite: '' };
+    const t = typeUnite(unite);
+    if (t === 'montant') return { nombre: formatNombre(v / 1000, 1), unite: 'k MAD', brut: v / 1000, decimales: 1 };
+    if (t === 'jours') return { nombre: formatNombre(v, 1), unite: 'j', brut: v, decimales: 1 };
+    if (t === 'fois') return { nombre: formatNombre(v, 2), unite: '×', brut: v, decimales: 2 };
+    return { nombre: formatNombre(v, 2), unite: '', brut: v, decimales: 2 };
+  }
+  function formatValeur(v, unite) { const p = partiesValeur(v, unite); return p.unite ? p.nombre + ' ' + p.unite : p.nombre; }
+  function formatVariation(v, unite) {
+    if (!estNombre(v)) return v === null || v === undefined ? '—' : String(v);
+    const s = formatValeur(v, unite);
+    return v > 0 && !/^0(,0+)?( |$)/.test(s) ? '+ ' + s : s;
+  }
+  function formatKMAD(v) { return estNombre(v) ? formatNombre(v / 1000, 1) : '—'; }
+  function heureCourte(d) { return d ? String(d.getHours()).padStart(2, '0') + ' h ' + String(d.getMinutes()).padStart(2, '0') : '—'; }
+  function ilYA(d) {
+    if (!d) return '';
+    const s = Math.max(0, Math.round((Date.now() - d.getTime()) / 1000));
+    if (s < 60) return 'il y a ' + s + ' s';
+    const mn = Math.round(s / 60);
+    if (mn < 60) return 'il y a ' + mn + ' min';
+    return 'il y a ' + Math.round(mn / 60) + ' h';
+  }
+
+  /* --- Routage : #/situation · #/familles · #/famille/id · #/kpi/K01 --- */
+  function routeCourante() {
+    const h = String(location.hash || '').replace(/^#\/?/, '').split('/');
+    if (h[0] === 'familles') return { ecran: 'familles' };
+    if (h[0] === 'famille' && FAMILLES.some(function (f) { return f.id === h[1]; })) return { ecran: 'famille', id: h[1] };
+    if (h[0] === 'kpi' && /^K\d{2}$/.test(h[1] || '')) return { ecran: 'kpi', id: h[1] };
+    return { ecran: 'situation' };
+  }
+  function cleRoute(r) { return r.ecran + ':' + (r.id || ''); }
+  function aller(hash) { if (location.hash !== hash) location.hash = hash; else rendre(); }
+
+  /* --- Pastilles de statut : couleur + icône + mot --- */
+  function pastille(feu, petite) {
+    const f = FEUX[feu] || FEUX.aucun;
+    return el('span', { class: 'pastille ' + feu + (petite ? ' pastille-menu' : '') }, [icone(f.icone), f.mot]);
+  }
+  function pastilleMenu(m, feu) { return m && !donneesBloquees() ? pastille(feu, true) : null; }
+  function donneesBloquees() { return !!(etat.modele && normaliser(etat.modele.statut) !== normaliser(FORMAT_ATTENDU.statutAttendu)); }
+
+  /* --- Conservation du focus pendant les mises à jour --- */
+  function memoriserFocus() { const a = document.activeElement; return a && a.dataset ? a.dataset.focus || '' : ''; }
+  function restaurerFocus(id) {
+    if (!id) return;
+    const n = document.querySelector('[data-focus="' + id.replace(/"/g, '') + '"]');
+    if (n && typeof n.focus === 'function') n.focus({ preventScroll: true });
+  }
+
+  /* --- Menu : Situation TFT → Famille → KPI --- */
+  function construireNav(m, dansVolet) {
+    const route = routeCourante();
+    const racine = el('ul');
+    const lienSituation = el('a', { class: 'lien-nav', href: '#/situation', 'data-focus': (dansVolet ? 'v' : 'n') + '-situation', 'aria-current': route.ecran === 'situation' ? 'page' : null, title: 'Situation TFT' }, [icone('situation'), el('span', { class: 'txt', texte: 'Situation TFT' })]);
+    racine.appendChild(el('li', null, lienSituation));
+    const actifFamilles = route.ecran === 'familles';
+    const lienFamilles = el('a', { class: 'lien-nav', href: '#/familles', 'data-focus': (dansVolet ? 'v' : 'n') + '-familles', 'aria-current': actifFamilles ? 'page' : null, title: 'Les KPI par famille' }, [icone('familles'), el('span', { class: 'txt', texte: 'Les KPI par famille' })]);
+    const liFamilles = el('li', null, lienFamilles);
+    const sous = el('ul', { class: 'nav-familles' });
+    for (const f of FAMILLES) {
+      const parDefaut = (route.ecran === 'kpi' && f.kpis.includes(route.id)) || (route.ecran === 'famille' && route.id === f.id);
+      const estOuverte = famillesDepliees.has(f.id) ? famillesDepliees.get(f.id) : parDefaut;
+      const idListe = (dansVolet ? 'v' : 'n') + '-liste-' + f.id;
+      const bouton = el('button', { type: 'button', class: 'bouton-deplier', 'aria-expanded': estOuverte ? 'true' : 'false', 'aria-controls': estOuverte ? idListe : null, 'aria-label': (estOuverte ? 'Replier ' : 'Déplier ') + f.nom, 'data-focus': (dansVolet ? 'v' : 'n') + '-deplier-' + f.id }, icone('chevron'));
+      bouton.addEventListener('click', function (e) {
+        e.preventDefault();
+        famillesDepliees.set(f.id, !estOuverte);
+        afficherNav();
+      });
+      const lien = el('a', { class: 'lien-nav', href: '#/famille/' + f.id, 'data-focus': (dansVolet ? 'v' : 'n') + '-famille-' + f.id, 'aria-current': route.ecran === 'famille' && route.id === f.id ? 'page' : null, title: f.nom }, [
+        el('span', { class: 'txt', texte: f.nom + ' (' + f.kpis.length + ')' }),
+        pastilleMenu(m, m ? feuFamille(m, f) : 'aucun')
+      ]);
+      const li = el('li', null, el('div', { class: 'famille-ligne' }, [bouton, lien]));
+      if (estOuverte) {
+        const ulK = el('ul', { class: 'nav-kpis', id: idListe });
+        for (const code of f.kpis) {
+          const k = m ? kpiParCode(m, code) : null;
+          const lienK = el('a', { class: 'lien-nav', href: '#/kpi/' + code, 'data-focus': (dansVolet ? 'v' : 'n') + '-kpi-' + code, 'aria-current': route.ecran === 'kpi' && route.id === code ? 'page' : null, title: k ? k.nomCourt : code }, [
+            el('span', { class: 'txt' }, [el('span', { class: 'code-kpi', texte: code }), k ? k.nomCourt : '']),
+            pastilleMenu(m, k ? k.feu27 : 'aucun')
+          ]);
+          ulK.appendChild(el('li', null, lienK));
+        }
+        li.appendChild(ulK);
+      }
+      sous.appendChild(li);
+    }
+    liFamilles.appendChild(sous);
+    racine.appendChild(liFamilles);
+    return racine;
+  }
+  function afficherNav() {
+    const focus = memoriserFocus();
+    const m = etat.modele;
+    document.getElementById('nav-ordinateur').replaceChildren(construireNav(m, false));
+    const volet = document.getElementById('volet');
+    if (volet.classList.contains('ouvert')) remplirVolet();
+    restaurerFocus(focus);
+  }
+
+  /* --- Barre d'onglets et volet (téléphone) --- */
+  function afficherOnglets() {
+    const route = routeCourante();
+    const nav = document.getElementById('onglets');
+    const b1 = el('button', { type: 'button', 'aria-current': route.ecran === 'situation' ? 'page' : null }, [icone('situation'), 'Situation TFT']);
+    b1.addEventListener('click', function () { fermerVolet(); aller('#/situation'); });
+    const b2 = el('button', { type: 'button', 'aria-current': route.ecran !== 'situation' ? 'page' : null, 'aria-haspopup': 'dialog' }, [icone('familles'), 'KPI par famille']);
+    b2.addEventListener('click', ouvrirVolet);
+    nav.replaceChildren(b1, b2);
+  }
+  function remplirVolet() {
+    const volet = document.getElementById('volet');
+    const fermer = el('button', { type: 'button', class: 'bouton-fermer', 'aria-label': 'Fermer le volet', 'data-focus': 'fermer-volet' }, icone('fermer'));
+    fermer.addEventListener('click', fermerVolet);
+    const nav = el('nav', { class: 'nav', 'aria-label': 'Familles et KPI' }, construireNav(etat.modele, true));
+    nav.addEventListener('click', function (e) { const a = e.target.closest('a'); if (a) fermerVolet(); });
+    volet.replaceChildren(el('div', { class: 'poignee' }), el('div', { class: 'volet-haut' }, [el('h2', { texte: 'Les KPI par famille' }), fermer]), nav);
+  }
+  function ouvrirVolet() {
+    remplirVolet();
+    document.getElementById('volet').classList.add('ouvert');
+    document.getElementById('volet-fond').classList.add('ouvert');
+    const b = document.querySelector('#volet .bouton-fermer');
+    if (b) b.focus();
+  }
+  function fermerVolet() {
+    document.getElementById('volet').classList.remove('ouvert');
+    document.getElementById('volet-fond').classList.remove('ouvert');
+  }
+
+  /* --- Panneau de synchronisation (menu, rail, bande mobile) --- */
+  function descriptionEtat() {
+    const s = etat.statut;
+    if (s === 'lecture') return { couleur: 'bleu', texte: 'Lecture en cours…' };
+    if (s === 'reconnexion') return { couleur: 'orange', texte: 'Reconnexion nécessaire' };
+    if (s === 'illisible') return { couleur: 'rouge', texte: 'Fichier illisible : dernières données conservées' };
+    if (!etat.modele) return { couleur: 'gris', texte: 'Aucun fichier connecté' };
+    if (!etat.syncActive) return { couleur: 'gris', texte: 'En pause' };
+    if (etat.mode === 'C') return { couleur: 'vert', texte: 'Importé · mis à jour ' + ilYA(etat.derniereMaj), importe: true };
+    return { couleur: 'vert', texte: 'Synchronisé · mis à jour ' + ilYA(etat.derniereMaj) };
+  }
+  function interrupteur(prefixe, avecLibelle) {
+    const b = el('button', { type: 'button', class: 'interrupteur', role: 'switch', 'aria-checked': etat.syncActive ? 'true' : 'false', 'aria-label': 'Synchronisation', 'data-focus': prefixe + '-interrupteur' }, [
+      el('span', { class: 'piste', 'aria-hidden': 'true' }, el('span', { class: 'rond' })),
+      avecLibelle ? el('span', { class: 'lecteur-seul', texte: etat.syncActive ? 'activée' : 'désactivée' }) : null
+    ]);
+    b.addEventListener('click', basculerSync); /* bouton natif : Espace et Entrée fonctionnent au clavier */
+    return b;
+  }
+  function infobulle(texte, libelle, prefixeFocus) {
+    const id = 'bulle-' + Math.random().toString(36).slice(2, 9);
+    const bouton = el('button', { type: 'button', class: 'bouton-info', 'aria-describedby': id, 'aria-label': libelle || 'Information', 'data-focus': prefixeFocus || null }, icone('info'));
+    return el('span', { class: 'infobulle' }, [bouton, el('span', { class: 'bulle', role: 'tooltip', id: id, texte: texte })]);
+  }
+  function texteInfobulleMode() {
+    if (etat.mode === 'A') return 'Direct : le fichier connecté est relu toutes les 2 secondes, en lecture seule. Après chaque Ctrl + S dans Excel, l’application se met à jour toute seule.';
+    if (etat.mode === 'B') return 'En ligne : donnees.xlsx est relu toutes les ' + (EST_LOCALHOST ? '3 secondes (localhost)' : '60 secondes') + '. Sur GitHub Pages, GitHub peut mettre jusqu’à 10 minutes pour publier une nouvelle version du fichier.';
+    if (etat.mode === 'C') return 'Import : le fichier a été lu une fois. Importez-le à nouveau après chaque modification.';
+    return 'Connectez votre fichier Excel pour afficher le tableau de bord.';
+  }
+  function construireSync(prefixe) {
+    const d = descriptionEtat();
+    const conteneur = document.createDocumentFragment();
+    /* Rail replié : icône + pastille + infobulle */
+    conteneur.appendChild(el('div', { class: 'sync-icone', title: 'Synchronisation : ' + d.texte, role: 'img', 'aria-label': 'Synchronisation : ' + d.texte }, [icone('sync'), el('span', { class: 'point ' + d.couleur })]));
+    const detail = el('div', { class: 'sync-detail' });
+    detail.appendChild(el('div', { class: 'sync-haut' }, [el('span', { class: 'sync-titre', id: prefixe + '-titre-sync', texte: 'Synchronisation' }), interrupteur(prefixe, true)]));
+    detail.appendChild(el('div', { class: 'etat', 'aria-live': 'polite' }, [el('span', { class: 'point ' + d.couleur, 'aria-hidden': 'true' }), el('span', { class: 'texte-etat', 'data-horloge': '1' }, [d.texte, etat.raison && (etat.statut === 'illisible' || etat.statut === 'reconnexion') ? el('span', { class: 'legende', style: 'display:block;margin-top:4px' }, etat.raison) : null])]));
+    detail.appendChild(el('div', { class: 'sync-infos' }, [
+      el('span', null, [el('b', { texte: 'Fichier : ' }), etat.fichierNom || '—']),
+      el('span', null, [el('b', { texte: 'Dernière mise à jour : ' }), etat.derniereMaj ? heureCourte(etat.derniereMaj) : '—']),
+      el('span', { style: 'display:flex;align-items:center;gap:8px' }, [el('span', null, [el('b', { texte: 'Mode : ' }), libelleMode()]), infobulle(texteInfobulleMode(), 'À propos du mode ' + libelleMode(), prefixe + '-info-mode')])
+    ]));
+    const boutons = el('div', { class: 'sync-boutons' });
+    if (etat.statut === 'reconnexion') {
+      const br = el('button', { type: 'button', class: 'btn btn-secondaire btn-petit', 'data-focus': prefixe + '-reconnecter', style: 'border-color:#F2A93B' }, [icone('lien'), 'Reconnecter']);
+      br.addEventListener('click', reconnecter);
+      boutons.appendChild(br);
+    }
+    const bc = el('button', { type: 'button', class: 'btn btn-secondaire btn-petit', 'data-focus': prefixe + '-connecter' }, [icone('fichier'), 'Connecter mon fichier Excel']);
+    bc.addEventListener('click', connecterFichier);
+    const bi = el('button', { type: 'button', class: 'btn btn-secondaire btn-petit', 'data-focus': prefixe + '-importer' }, [icone('importer'), 'Importer un fichier']);
+    bi.addEventListener('click', ouvrirImport);
+    boutons.append(bc, bi);
+    const be = el('button', { type: 'button', class: 'lien-discret', 'data-focus': prefixe + '-effacer' }, 'Effacer mes données');
+    be.addEventListener('click', effacerDonnees);
+    boutons.appendChild(be);
+    detail.appendChild(boutons);
+    if (!API_DIRECTE) detail.appendChild(el('p', { class: 'sync-message', texte: 'Le suivi en direct fonctionne avec Chrome ou Edge sur ordinateur. Ici, importez à nouveau le fichier après chaque modification.' }));
+    conteneur.appendChild(detail);
+    return conteneur;
+  }
+  function construireBandeMobile() {
+    const d = descriptionEtat();
+    const frag = document.createDocumentFragment();
+    frag.appendChild(el('div', { class: 'monogramme', 'aria-hidden': 'true', style: 'flex:0 0 32px;height:32px;font-size:16px;border-radius:10px' }, 'A'));
+    frag.appendChild(el('div', { class: 'etat', 'aria-live': 'polite', title: etat.raison || d.texte }, [el('span', { class: 'point ' + d.couleur, 'aria-hidden': 'true' }), el('span', { class: 'texte-etat', 'data-horloge': '1', texte: d.texte + (etat.fichierNom ? ' · ' + etat.fichierNom : '') })]));
+    if (etat.statut === 'reconnexion') {
+      const br = el('button', { type: 'button', class: 'bouton-icone', 'aria-label': 'Reconnecter', 'data-focus': 'm-reconnecter' }, icone('lien'));
+      br.addEventListener('click', reconnecter);
+      frag.appendChild(br);
+    }
+    frag.appendChild(interrupteur('m', true));
+    const bi = el('button', { type: 'button', class: 'bouton-icone', 'aria-label': API_DIRECTE ? 'Connecter mon fichier Excel' : 'Importer un fichier', 'data-focus': 'm-importer' }, icone('importer'));
+    bi.addEventListener('click', API_DIRECTE ? connecterFichier : ouvrirImport);
+    frag.appendChild(bi);
+    return frag;
+  }
+  function afficherSync() {
+    const focus = memoriserFocus();
+    document.getElementById('sync-ordinateur').replaceChildren(construireSync('o'));
+    document.getElementById('bande-mobile').replaceChildren(construireBandeMobile());
+    restaurerFocus(focus);
+  }
+  function mettreAJourHorloge() {
+    if (etat.statut !== 'ok' || !etat.modele || !etat.syncActive) return;
+    const d = descriptionEtat();
+    document.querySelectorAll('#sync-ordinateur [data-horloge]').forEach(function (n) { n.textContent = d.texte; });
+    document.querySelectorAll('#bande-mobile [data-horloge]').forEach(function (n) { n.textContent = d.texte + (etat.fichierNom ? ' · ' + etat.fichierNom : ''); });
+    const icon = document.querySelector('#sync-ordinateur .sync-icone');
+    if (icon) { icon.setAttribute('title', 'Synchronisation : ' + d.texte); icon.setAttribute('aria-label', 'Synchronisation : ' + d.texte); }
+  }
+
+  /* --- Alertes (structure, cellules en erreur, vérification) --- */
+  function afficherAlertes() {
+    const zone = document.getElementById('alertes');
+    const blocs = [];
+    if (etat.problemes.length && etat.modele) {
+      const bouton = el('button', { type: 'button', class: 'btn btn-secondaire btn-petit', 'data-focus': 'alerte-reessayer' }, 'Réessayer');
+      bouton.addEventListener('click', function () { etat.signature = null; etat.empreinteOctets = ''; etat.derniereVerif = 0; if (etat.mode === 'C') ouvrirImport(); else verifierMaintenant(); });
+      blocs.push(el('div', { class: 'alerte' }, [icone('alerte'), el('div', null, [
+        el('strong', { texte: 'La nouvelle version du fichier n’a pas été retenue : les dernières données valides restent affichées.' }),
+        el('ul', null, etat.problemes.slice(0, 8).map(function (p) { return el('li', { texte: p.message }); })),
+        etat.problemes.length > 8 ? el('p', { class: 'legende', texte: 'et ' + (etat.problemes.length - 8) + ' autre(s) point(s).' }) : null,
+        el('div', { class: 'actions' }, bouton)
+      ])]));
+    }
+    if (etat.avertissements.length) {
+      blocs.push(el('div', { class: 'alerte attention' }, [icone('info'), el('div', null, [el('strong', { texte: 'À vérifier dans le fichier' }), el('ul', null, etat.avertissements.map(function (a) { return el('li', { texte: a }); }))])]));
+    }
+    zone.replaceChildren.apply(zone, blocs);
+  }
+
+  /* --- Toasts --- */
+  function toast(texte, type) {
+    const zone = document.getElementById('toasts');
+    const t = el('div', { class: 'toast ' + (type || '') }, [icone(type === 'erreur' ? 'alerte' : (type === 'info' ? 'info' : 'coche')), el('span', { texte: texte })]);
+    zone.appendChild(t);
+    while (zone.children.length > 3) zone.removeChild(zone.firstChild);
+    setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 4500);
+  }
+
+  /* --- Illumination des KPI modifiés pendant 2 secondes --- */
+  function illuminerKPI(codes) {
+    for (const code of codes) {
+      document.querySelectorAll('[data-kpi="' + code + '"]').forEach(function (n) {
+        n.classList.add('illumine');
+        setTimeout(function () { n.classList.remove('illumine'); }, 2000);
+      });
+    }
+  }
+
+  /* --- Chiffres qui montent (désactivé si « réduire les animations ») --- */
+  function animerChiffre(noeud, cible, decimales, diviseur) {
+    if (reduireAnimations.matches || !estNombre(cible)) return;
+    const debut = performance.now(), duree = 900;
+    function pas(t) {
+      const p = Math.min(1, (t - debut) / duree);
+      const e = 1 - Math.pow(1 - p, 3);
+      noeud.textContent = formatNombre(cible * e / (diviseur || 1), decimales);
+      if (p < 1) requestAnimationFrame(pas);
+      else noeud.textContent = formatNombre(cible / (diviseur || 1), decimales);
+    }
+    requestAnimationFrame(pas);
+  }
+
+  /* --- Sparkline : uniquement les années présentes dans le fichier --- */
+  function sparkline(k) {
+    const points = [];
+    if (estNombre(k.v26)) points.push({ an: 2026, v: k.v26 });
+    if (estNombre(k.v27)) points.push({ an: 2027, v: k.v27 });
+    const svg = document.createElementNS(NS_SVG, 'svg');
+    svg.setAttribute('class', 'sparkline');
+    svg.setAttribute('viewBox', '0 0 240 40');
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', 'Tendance : ' + points.map(function (p) { return p.an + ' ' + formatValeur(p.v, k.unite); }).join(', '));
+    if (!points.length) return svg;
+    const min = Math.min.apply(null, points.map(function (p) { return p.v; }));
+    const max = Math.max.apply(null, points.map(function (p) { return p.v; }));
+    const y = function (v) { return max === min ? 20 : 34 - (v - min) / (max - min) * 28; };
+    const x = function (i) { return points.length === 1 ? 232 : 8 + i * (224 / (points.length - 1)); };
+    if (points.length > 1) {
+      const ligne = document.createElementNS(NS_SVG, 'polyline');
+      ligne.setAttribute('points', points.map(function (p, i) { return x(i) + ',' + y(p.v); }).join(' '));
+      ligne.setAttribute('fill', 'none');
+      ligne.setAttribute('stroke', PALETTE.or);
+      ligne.setAttribute('stroke-width', '1.25');
+      ligne.setAttribute('vector-effect', 'non-scaling-stroke');
+      svg.appendChild(ligne);
+    }
+    const dernier = points[points.length - 1];
+    const point = document.createElementNS(NS_SVG, 'circle');
+    point.setAttribute('cx', String(x(points.length - 1)));
+    point.setAttribute('cy', String(y(dernier.v)));
+    point.setAttribute('r', '3');
+    point.setAttribute('fill', PALETTE.or);
+    svg.appendChild(point);
+    return svg;
+  }
+
+  function texteFormule(k) {
+    const lignes = [];
+    if (k.formule) lignes.push('Formule : ' + k.formule);
+    if (k.dico && k.dico.definition) lignes.push((k.formule ? '' : 'Formule : ') + k.dico.definition);
+    return lignes.join('\n') || 'Formule non renseignée dans le fichier.';
+  }
+
+  /* --- Carte KPI très grand format --- */
+  function carteKPI(k, animer) {
+    const p = partiesValeur(k.v27, k.unite);
+    const nombre = el('span', { class: 'chiffre', texte: p.nombre });
+    if (animer && p.brut !== undefined) animerChiffre(nombre, k.v27, p.decimales, typeUnite(k.unite) === 'montant' ? 1000 : 1);
+    const lien = el('a', { href: '#/kpi/' + k.code, 'data-focus': 'carte-' + k.code, texte: k.nomCourt });
+    const carte = el('article', { class: 'verre carte-kpi', 'data-kpi': k.code, 'aria-label': k.nomCourt + ' : ' + formatValeur(k.v27, k.unite) + ', feu ' + FEUX[k.feu27].mot }, [
+      el('div', { class: 'carte-haut' }, [
+        el('div', { class: 'carte-titre' }, [el('span', { class: 'code', texte: k.code }), el('h3', null, lien)]),
+        infobulle(texteFormule(k), 'Formule de ' + k.nomCourt, 'info-' + k.code)
+      ]),
+      el('div', { class: 'valeur-geante' }, [nombre, p.unite ? el('span', { class: 'unite', texte: p.unite }) : null]),
+      el('div', { class: 'carte-bas' }, [
+        el('div', { class: 'comparaison' }, [
+          el('span', null, ['2026 : ', el('span', { class: 'chiffre', texte: formatValeur(k.v26, k.unite) })]),
+          el('span', null, ['Variation : ', el('span', { class: 'variation', texte: formatVariation(k.variation, k.unite) })])
+        ]),
+        pastille(k.feu27)
+      ]),
+      sparkline(k)
+    ]);
+    carte.addEventListener('click', function (e) { if (e.target.closest('a, button')) return; aller('#/kpi/' + k.code); });
+    return carte;
+  }
+
+  /* --- Fil d'Ariane --- */
+  function afficherAriane(route) {
+    const zone = document.getElementById('ariane');
+    const items = [];
+    const sep = function () { return icone('chevron'); };
+    if (route.ecran === 'situation') items.push(el('span', { 'aria-current': 'page', texte: 'Situation TFT' }));
+    else {
+      items.push(el('a', { href: '#/situation', texte: 'Situation TFT' }), sep());
+      if (route.ecran === 'familles') items.push(el('span', { 'aria-current': 'page', texte: 'Les KPI par famille' }));
+      else {
+        items.push(el('a', { href: '#/familles', texte: 'Les KPI par famille' }), sep());
+        const f = route.ecran === 'famille' ? FAMILLES.find(function (x) { return x.id === route.id; }) : familleDuKPI(route.id);
+        if (route.ecran === 'famille') items.push(el('span', { 'aria-current': 'page', texte: f.nom }));
+        else {
+          if (f) items.push(el('a', { href: '#/famille/' + f.id, texte: f.nom }), sep());
+          const k = etat.modele ? kpiParCode(etat.modele, route.id) : null;
+          items.push(el('span', { 'aria-current': 'page', texte: route.id + (k ? ' · ' + k.nomCourt : '') }));
+        }
+      }
+    }
+    zone.replaceChildren.apply(zone, items);
+  }
+
+  /* --- États : chargement, vide, erreur, disjoncteur --- */
+  function vueChargement() {
+    return el('div', { 'aria-busy': 'true', 'aria-label': 'Chargement des données' }, [
+      el('div', { class: 'squelette sq-heros' }),
+      el('div', { class: 'grille-kpi' }, [el('div', { class: 'squelette sq-carte' }), el('div', { class: 'squelette sq-carte' }), el('div', { class: 'squelette sq-carte' }), el('div', { class: 'squelette sq-carte' })])
+    ]);
+  }
+  function zoneDepot() {
+    const z = el('div', { class: 'zone-depot' }, [icone('importer'), el('p', { texte: 'Glissez votre fichier Excel ici (.xlsx, .xlsm, .xls ou .csv, 10 Mo maximum).' })]);
+    return z;
+  }
+  function vueVide() {
+    const attente = !!etat.poigneeEnAttente;
+    const principal = el('button', { type: 'button', class: 'btn btn-principal', 'data-focus': 'vide-connecter' }, [icone(attente ? 'lien' : 'fichier'), attente ? 'Reconnecter « ' + (etat.poigneeEnAttente.name || 'mon fichier') + ' »' : 'Connecter mon fichier Excel']);
+    principal.addEventListener('click', attente ? reconnecter : connecterFichier);
+    const secondaire = el('button', { type: 'button', class: 'btn btn-secondaire', 'data-focus': 'vide-importer' }, [icone('importer'), 'Importer un fichier']);
+    secondaire.addEventListener('click', ouvrirImport);
+    return el('section', { class: 'verre etat-vide' }, [
+      el('p', { class: 'surtitre', texte: 'ATLAS DISTRIBUTION SA · TFT IAS 7' }),
+      el('h1', { texte: 'Connecter mon fichier Excel' }),
+      el('p', { texte: 'Le tableau de bord se construit à partir de votre classeur (donnees.xlsx). Le fichier est lu dans ce navigateur, en lecture seule : aucune donnée n’est envoyée sur Internet.' }),
+      zoneDepot(),
+      el('div', { class: 'actions-ligne' }, [principal, secondaire]),
+      !API_DIRECTE ? el('p', { class: 'sync-message', style: 'margin-top:24px', texte: 'Le suivi en direct fonctionne avec Chrome ou Edge sur ordinateur. Ici, importez à nouveau le fichier après chaque modification.' }) : null
+    ]);
+  }
+  function vueErreur() {
+    const b = el('button', { type: 'button', class: 'btn btn-principal', 'data-focus': 'erreur-reessayer' }, 'Réessayer');
+    b.addEventListener('click', function () {
+      etat.signature = null; etat.empreinteOctets = ''; etat.derniereVerif = 0;
+      if (etat.mode === 'A' || etat.mode === 'B') verifierMaintenant(); else connecterFichier();
+    });
+    return el('section', { class: 'verre etat-vide' }, [
+      icone('alerte'),
+      el('h1', { texte: 'Le fichier n’a pas pu être lu' }),
+      el('p', { texte: etat.erreurInitiale || 'Le fichier n’a pas pu être lu.' }),
+      etat.problemes.length > 1 ? el('ul', { style: 'text-align:left;color:rgba(255,255,255,.78);margin:0 auto 24px;max-width:600px' }, etat.problemes.slice(0, 10).map(function (p) { return el('li', { texte: p.message }); })) : null,
+      el('div', { class: 'actions-ligne' }, b)
+    ]);
+  }
+  function vueDisjoncteur(m) {
+    const total = m.controles.total, conformes = m.controles.conformes;
+    const titre = estNombre(total) && estNombre(conformes)
+      ? 'Données non fiables : ' + formatNombre(total - conformes, 0) + ' contrôle' + (total - conformes > 1 ? 's' : '') + ' en écart sur ' + formatNombre(total, 0)
+      : 'Données non fiables : statut global « ' + (m.statut || 'vide') + ' »';
+    return el('section', { class: 'verre disjoncteur', role: 'alert' }, [
+      icone('disjoncteur'),
+      el('h1', { texte: titre }),
+      el('p', { texte: 'Les chiffres sont masqués jusqu’à la correction du fichier. Ouvrez l’onglet CONTROLES : le statut global (STATUT_GLOBAL) doit afficher « CONFORME ». Enregistrez ensuite le fichier : l’application reprend toute seule.' })
+    ]);
+  }
+
+  /* --- Écran « Situation TFT » --- */
+  function vueSituation(m, animer) {
+    const page = el('div');
+    page.appendChild(el('div', { class: 'entete-page' }, [el('div', null, [
+      el('p', { class: 'surtitre', texte: 'ATLAS DISTRIBUTION SA · exercice 2027 face à 2026 · en milliers de dirhams' }),
+      el('h1', { texte: 'Situation TFT' })
+    ])]));
+    const total = m.controles.total, conformes = m.controles.conformes;
+    page.appendChild(el('section', { class: 'verre heros', 'aria-label': 'Réponse principale' }, [
+      m.titre ? el('p', { class: 'verdict', texte: m.titre }) : null,
+      el('p', { class: 'message', texte: m.message }),
+      el('div', { class: 'controle' }, [pastille('vert'), el('span', { class: 'legende', texte: 'Contrôles : ' + (estNombre(conformes) ? formatNombre(conformes, 0) : '—') + ' sur ' + (estNombre(total) ? formatNombre(total, 0) : '—') + ' conformes · statut ' + m.statut })]),
+      el('div', { class: 'flux' }, [
+        blocFlux('Flux opérationnel', 'OT', m.flux.OT, false, animer),
+        blocFlux('Flux d’investissement', 'IT', m.flux.IT, false, animer),
+        blocFlux('Flux de financement', 'FT', m.flux.FT, false, animer),
+        blocFlux('Variation de la trésorerie', 'V', m.flux.V, true, animer),
+        blocFlux('Trésorerie nette à l’ouverture', 'T0', m.flux.T0, false, animer),
+        blocFlux('Trésorerie nette à la clôture', 'T1', m.flux.T1, true, animer)
+      ])
+    ]));
+    /* Les 6 cartes de l'onglet DASHBOARD */
+    const cartes = el('div', { class: 'grille-kpi' });
+    for (const code of CARTES_SITUATION) { const k = kpiParCode(m, code); if (k) cartes.appendChild(carteKPI(k, animer)); }
+    page.appendChild(el('section', { class: 'section', 'aria-labelledby': 't-cartes' }, [el('h2', { id: 't-cartes', texte: 'Les six indicateurs clés' }), el('p', { class: 'legende', texte: 'Valeur 2027 en grand, 2026 et variation en dessous, feu 2027 lu dans l’onglet KPI.' }), cartes]));
+    /* Flowcharts */
+    const g = el('div', { class: 'grille-graphiques' }, [
+      carteGraphique('Flowchart du cash', 'Trésorerie nette 2026 → flux de 2027 → trésorerie nette 2027 · KPI, section 4 (cascade) · k MAD', 'cascade', ''),
+      carteGraphique('Entonnoir du cash', 'EBITDA → flux opérationnel → après loyers → après service des emprunts · KPI, section 4 · k MAD', 'entonnoir', ''),
+      carteGraphique('D’où vient l’argent, où il va', 'Sankey des flux 2027, lu dans l’onglet TFT · or : entrées · grenat : sorties · blanc : total · k MAD', 'sankey', 'large haut'),
+      carteJauges(m)
+    ]);
+    page.appendChild(el('section', { class: 'section', 'aria-labelledby': 't-flux' }, [el('h2', { id: 't-flux', texte: 'Les flux en images' }), el('p', { class: 'legende', texte: 'Chaque barre ou flèche porte son montant.' }), g]));
+    /* Recommandations au DG, mot pour mot */
+    const recos = m.recommandations.length ? m.recommandations : pointsAttention(m);
+    page.appendChild(el('section', { class: 'section', 'aria-labelledby': 't-recos' }, [
+      el('h2', { id: 't-recos', texte: m.recommandations.length ? 'Trois recommandations au DG' : 'Points d’attention' }),
+      el('p', { class: 'legende', texte: m.recommandations.length ? 'Lues dans l’onglet KPI, section 5, mot pour mot.' : 'Recommandations absentes du fichier : points d’attention calculés à partir des chiffres, avec des règles simples.' }),
+      el('div', { class: 'recos' }, recos.map(function (t, i) { return el('article', { class: 'verre reco' }, [el('div', { class: 'num', 'aria-hidden': 'true', texte: String(i + 1) }), el('p', { texte: t })]); })),
+      m.avertissementRecos ? el('p', { class: 'legende note-bas', texte: m.avertissementRecos }) : null
+    ]));
+    /* Tableau premium du TFT */
+    page.appendChild(sectionTableauTFT(m));
+    /* Vérification interne des calculs */
+    const verif = verifierCalculs(m);
+    const ecarts = verif.filter(function (v) { return !v.ok; });
+    page.appendChild(el('div', { class: 'verification legende' }, [
+      icone(ecarts.length ? 'alerte' : 'bouclier'),
+      el('span', { texte: ecarts.length
+        ? 'Vérification interne : ' + ecarts.length + ' écart(s) entre le fichier et le calcul refait (le fichier s’affiche) : ' + ecarts.map(function (e) { return e.nom; }).join(' ; ') + '.'
+        : 'Vérification interne : ' + verif.length + ' calculs refaits à partir du TFT et des KPI, écarts nuls.' })
+    ]));
+    return page;
+  }
+  function blocFlux(libelle, code, f, total, animer) {
+    const n = el('span', { class: 'chiffre', texte: formatKMAD(f.v27) });
+    if (animer) animerChiffre(n, f.v27, 1, 1000);
+    return el('div', { class: 'bloc' + (total ? ' total' : '') }, [
+      el('div', { class: 'lib', texte: libelle + ' (' + code + ')' }),
+      el('div', { class: 'val' }, [n, el('span', { class: 'unite', texte: 'k MAD' })]),
+      el('div', { class: 'avant', texte: '2026 : ' + formatKMAD(f.v26) })
+    ]);
+  }
+  function carteGraphique(titre, legende, type, classes) {
+    return el('article', { class: 'verre carte-graphique ' + (classes || '') }, [
+      el('h3', { texte: titre }),
+      el('p', { class: 'legende', texte: legende }),
+      el('div', { class: 'graphique' + (/haut/.test(classes || '') ? ' haut' : ''), 'data-graphique': type, role: 'img' })
+    ]);
+  }
+  function carteJauges(m) {
+    const grille = el('div', { class: 'jauges' });
+    m.graphiques.jauges.forEach(function (j, i) {
+      grille.appendChild(el('div', null, [el('div', { class: 'jauge', 'data-graphique': 'jauge', 'data-index': String(i), role: 'img' }), el('p', { class: 'lib-jauge', texte: j.libelle })]));
+    });
+    return el('article', { class: 'verre carte-graphique large' }, [
+      el('h3', { texte: 'Jauges face aux seuils' }),
+      el('p', { class: 'legende', texte: 'Conversion en cash face à sa cible, dette nette ÷ EBITDA face au plafond bancaire, couverture de la dette face à son seuil · KPI, section 4. Le trait blanc marque le repère.' }),
+      grille
+    ]);
+  }
+
+  function sectionTableauTFT(m) {
+    const bouton = el('button', { type: 'button', class: 'btn btn-principal', 'data-focus': 'export-tft' }, [icone('exporter'), 'Exporter en Excel']);
+    bouton.addEventListener('click', function () { exporterTFT(m); });
+    const table = el('table', { class: 'tft' });
+    table.appendChild(el('caption', { class: 'lecteur-seul', texte: 'Tableau des flux de trésorerie, méthode indirecte, 2027 et 2026, en milliers de dirhams' }));
+    table.appendChild(el('colgroup', null, [el('col', { class: 'c-code' }), el('col'), el('col', { class: 'c-num' }), el('col', { class: 'c-num' })]));
+    table.appendChild(el('thead', null, el('tr', null, [el('th', { scope: 'col', texte: 'Ligne' }), el('th', { scope: 'col', texte: 'Libellé' }), el('th', { scope: 'col', class: 'num', texte: '2027' }), el('th', { scope: 'col', class: 'num', texte: '2026' })])));
+    const corps = el('tbody');
+    for (const l of m.tft) {
+      if (l.type === 'titre') { corps.appendChild(el('tr', { class: 'titre' }, [el('td', { colspan: '4', texte: l.libelle })])); continue; }
+      corps.appendChild(el('tr', { class: l.type, title: l.note || null }, [
+        el('td', { class: 'code', texte: l.code }),
+        el('td', { class: 'lib' }, l.type === 'total' ? el('b', { texte: l.libelle }) : l.libelle),
+        el('td', { class: 'num', texte: formatKMAD(l.v27) }),
+        el('td', { class: 'num', texte: formatKMAD(l.v26) })
+      ]));
+    }
+    table.appendChild(corps);
+    return el('section', { class: 'section', 'aria-labelledby': 't-tft' }, [
+      el('div', { class: 'verre tableau-carte' }, [
+        el('div', { class: 'tableau-entete' }, [el('div', null, [el('h2', { id: 't-tft', texte: 'Tableau des flux de trésorerie' }), el('p', { class: 'legende', texte: 'Méthode indirecte (IAS 7, modifiée par IFRS 18), lignes O1 à T1, en milliers de dirhams. L’ordre du TFT est conservé.' })]), bouton]),
+        table
+      ])
+    ]);
+  }
+
+  /* Export Excel : formules piégées neutralisées. */
+  function exporterTFT(m) {
+    if (!window.XLSX || !window.XLSX.utils) { toast('Export impossible : la bibliothèque Excel n’est pas chargée.', 'erreur'); return; }
+    const lignes = [
+      [neutraliserCellule('ATLAS DISTRIBUTION SA · Tableau des flux de trésorerie IFRS · méthode indirecte · en milliers de dirhams (k MAD)')],
+      [],
+      ['Ligne', 'Libellé', '2027', '2026', 'Note']
+    ];
+    for (const l of m.tft) {
+      if (l.type === 'titre') lignes.push(['', neutraliserCellule(l.libelle), '', '', '']);
+      else lignes.push([neutraliserCellule(l.code), neutraliserCellule(l.libelle), estNombre(l.v27) ? l.v27 / 1000 : '', estNombre(l.v26) ? l.v26 / 1000 : '', neutraliserCellule(l.note || '')]);
+    }
+    const ws = window.XLSX.utils.aoa_to_sheet(lignes);
+    for (const cle of Object.keys(ws)) {
+      if (cle.charAt(0) === '!') continue;
+      const c = ws[cle];
+      if (c && c.t === 'n') c.z = '#,##0.0;-#,##0.0';
+      if (c && c.t === 's') c.v = neutraliserCellule(c.v);
+    }
+    ws['!cols'] = [{ wch: 8 }, { wch: 70 }, { wch: 14 }, { wch: 14 }, { wch: 30 }];
+    const classeur = window.XLSX.utils.book_new();
+    window.XLSX.utils.book_append_sheet(classeur, ws, 'TFT');
+    try {
+      window.XLSX.writeFile(classeur, 'TFT-ATLAS-2027.xlsx', { compression: true });
+      toast('Export Excel prêt : TFT-ATLAS-2027.xlsx', 'succes');
+    } catch (e) { toast('L’export n’a pas pu être créé.', 'erreur'); }
+  }
+
+  /* --- Écran « Les KPI par famille » --- */
+  function vueFamilles(m) {
+    const page = el('div');
+    const compte = { vert: 0, orange: 0, rouge: 0, aucun: 0 };
+    FAMILLES.forEach(function (f) { compte[feuFamille(m, f)]++; });
+    page.appendChild(el('div', { class: 'entete-page' }, [el('div', null, [el('p', { class: 'surtitre', texte: '14 KPI · 5 familles · 2027 face à 2026' }), el('h1', { texte: 'Les KPI par famille' })])]));
+    page.appendChild(el('section', { class: 'verre heros' }, [
+      el('p', { class: 'verdict', texte: 'Feux des familles : ' + [compte.vert ? compte.vert + ' vert' + (compte.vert > 1 ? 's' : '') : '', compte.orange ? compte.orange + ' orange' : '', compte.rouge ? compte.rouge + ' rouge' + (compte.rouge > 1 ? 's' : '') : ''].filter(Boolean).join(', ') + '.' }),
+      el('p', { class: 'message', texte: 'Une famille prend le feu le plus sévère de ses KPI. Cliquez sur une famille pour voir ses KPI en grand.' })
+    ]));
+    const grille = el('div', { class: 'grille-familles' });
+    for (const f of FAMILLES) {
+      const lien = el('a', { href: '#/famille/' + f.id, 'data-focus': 'fam-' + f.id, texte: f.nom });
+      const carte = el('article', { class: 'verre carte-famille', 'data-famille': f.id }, [
+        el('div', { class: 'haut' }, [el('h3', null, lien), pastille(feuFamille(m, f))]),
+        el('ul', null, f.kpis.map(function (code) {
+          const k = kpiParCode(m, code);
+          return el('li', { 'data-kpi': code }, [el('span', null, [el('span', { class: 'code-kpi', texte: code }), k ? k.nomCourt : '']), el('span', { style: 'display:flex;gap:10px;align-items:center' }, [el('span', { class: 'chiffre', texte: k ? formatValeur(k.v27, k.unite) : '—' }), k ? pastille(k.feu27, true) : null])]);
+        }))
+      ]);
+      carte.addEventListener('click', function (e) { if (e.target.closest('a, button')) return; aller('#/famille/' + f.id); });
+      grille.appendChild(carte);
+    }
+    page.appendChild(el('section', { class: 'section', 'aria-label': 'Familles' }, grille));
+    page.appendChild(el('section', { class: 'section', 'aria-labelledby': 't-radar' }, [
+      el('h2', { id: 't-radar', texte: 'Radar des six axes' }),
+      el('p', { class: 'legende', texte: 'Score de 0 à 100, 2027 face à 2026, avec la cible · KPI, section 4 (radar).' }),
+      el('article', { class: 'verre carte-graphique' }, el('div', { class: 'graphique haut', 'data-graphique': 'radar', role: 'img' }))
+    ]));
+    return page;
+  }
+
+  /* --- Page d'une famille --- */
+  function vueFamille(m, id, animer) {
+    const f = FAMILLES.find(function (x) { return x.id === id; });
+    const page = el('div');
+    page.appendChild(el('div', { class: 'entete-page' }, [el('div', null, [el('p', { class: 'surtitre', texte: 'Famille · ' + f.kpis.length + ' KPI' }), el('h1', { texte: f.nom })]), pastille(feuFamille(m, f))]));
+    const grille = el('div', { class: 'grille-kpi' });
+    for (const code of f.kpis) { const k = kpiParCode(m, code); if (k) grille.appendChild(carteKPI(k, animer)); }
+    page.appendChild(grille);
+    if (f.id === 'bfr') {
+      page.appendChild(el('section', { class: 'section', 'aria-labelledby': 't-bullet' }, [
+        el('h2', { id: 't-bullet', texte: 'Les délais face à leur seuil vert' }),
+        el('p', { class: 'legende', texte: 'Délai clients, délai stocks et délai fournisseurs 2027 · trait blanc : seuil vert · zones : vert (la plus claire), orange, rouge · KPI, section 5.' }),
+        el('article', { class: 'verre carte-graphique' }, el('div', { class: 'graphique', 'data-graphique': 'bullet', role: 'img' }))
+      ]));
+    }
+    return page;
+  }
+
+  /* --- Page d'un KPI --- */
+  function vueKPI(m, code, animer) {
+    const k = kpiParCode(m, code);
+    const page = el('div');
+    if (!k) { page.appendChild(el('p', { texte: 'KPI introuvable dans le fichier : ' + code + '.' })); return page; }
+    const f = familleDuKPI(code);
+    page.appendChild(el('div', { class: 'entete-page' }, [el('div', null, [el('p', { class: 'surtitre', texte: k.code + (f ? ' · ' + f.nom : '') }), el('h1', { texte: k.nomCourt })])]));
+    const carte = carteKPI(k, animer);
+    carte.appendChild(el('div', { class: 'feux-detail' }, [el('span', { texte: 'Feu 2027 :' }), pastille(k.feu27), el('span', { texte: 'Feu 2026 :' }), pastille(k.feu26)]));
+    page.appendChild(el('div', { class: 'grille-kpi' }, [carte, dictionnaireKPI(k)]));
+    if (f && f.kpis.length > 1) {
+      page.appendChild(el('nav', { class: 'voisins', 'aria-label': 'Autres KPI de la famille' }, f.kpis.filter(function (c) { return c !== code; }).map(function (c) {
+        const x = kpiParCode(m, c);
+        return el('a', { class: 'btn btn-secondaire btn-petit', href: '#/kpi/' + c, texte: c + ' · ' + (x ? x.nomCourt : '') });
+      })));
+    }
+    return page;
+  }
+  function dictionnaireKPI(k) {
+    const d = k.dico || { definition: '', unite: '', vert: '', ambre: '', rouge: '', pourquoi: '' };
+    return el('dl', { class: 'verre dico', 'aria-label': 'Dictionnaire du KPI' }, [
+      el('div', { class: 'plein' }, [el('dt', { texte: 'Définition' }), el('dd', { texte: d.definition || '—' })]),
+      el('div', null, [el('dt', { texte: 'Unité' }), el('dd', { texte: d.unite || k.unite || '—' })]),
+      el('div', null, [el('dt', { texte: 'Nom défini' }), el('dd', { texte: k.nomDefini ? k.nomDefini + ' / _2026' : '—' })]),
+      el('div', { class: 'plein' }, [el('dt', { texte: 'Seuils' }), el('dd', null, el('div', { class: 'seuils' }, [
+        el('span', { class: 'pastille vert' }, [icone('coche'), 'Vert : ' + (d.vert || '–')]),
+        el('span', { class: 'pastille orange' }, [icone('alerte'), 'Orange (« ambre ») : ' + (d.ambre || '–')]),
+        el('span', { class: 'pastille rouge' }, [icone('croix'), 'Rouge : ' + (d.rouge || '–')])
+      ]))]),
+      el('div', { class: 'plein' }, [el('dt', { texte: 'Pourquoi il compte' }), el('dd', { texte: d.pourquoi || '—' })])
+    ]);
+  }
+
+  /* --- Rendu général, en conservant onglet, sélection et défilement --- */
+  function rendre(options) {
+    const route = routeCourante();
+    const cle = cleRoute(route);
+    const garderDefilement = options && options.conserverDefilement && cle === premierAffichageVue;
+    const y = window.scrollY;
+    const focus = memoriserFocus();
+    const m = etat.modele;
+    detruireGraphiques();
+    afficherNav();
+    afficherOnglets();
+    afficherAriane(route);
+    afficherAlertes();
+    const vue = document.getElementById('vue');
+    let contenu;
+    const animer = cle !== premierAffichageVue && !(options && options.conserverDefilement);
+    if (!m) {
+      if (etat.statut === 'lecture' || etat.premiereLecture) contenu = vueChargement();
+      else if (etat.erreurInitiale) contenu = vueErreur();
+      else contenu = vueVide();
+    } else if (donneesBloquees()) contenu = vueDisjoncteur(m);
+    else if (route.ecran === 'familles') contenu = vueFamilles(m);
+    else if (route.ecran === 'famille') contenu = vueFamille(m, route.id, animer);
+    else if (route.ecran === 'kpi') contenu = vueKPI(m, route.id, animer);
+    else contenu = vueSituation(m, animer);
+    vue.replaceChildren(contenu);
+    document.title = 'ATLAS DISTRIBUTION SA · ' + (route.ecran === 'situation' ? 'Situation TFT' : 'Les KPI par famille');
+    const jeton = ++jetonRendu;
+    if (m && !donneesBloquees()) requestAnimationFrame(function () { if (jeton === jetonRendu) dessinerGraphiques(m); });
+    if (garderDefilement) window.scrollTo(0, y);
+    else if (cle !== premierAffichageVue && premierAffichageVue) window.scrollTo(0, 0);
+    if (m) premierAffichageVue = cle;
+    restaurerFocus(focus);
+  }
+
+  /* =======================================================================
+     7. GRAPHIQUES (Apache ECharts, infobulles en texte simple, jamais en HTML)
+     ======================================================================= */
+
+  const graphiques = [];
+  let jetonRendu = 0; /* seul le dernier rendu dessine ses graphiques */
+  function detruireGraphiques() {
+    while (graphiques.length) {
+      const g = graphiques.pop();
+      try { if (g.observateur) g.observateur.disconnect(); g.instance.dispose(); } catch (e) { /* rien */ }
+    }
+  }
+  function optionsCommunes() {
+    return {
+      backgroundColor: 'transparent',
+      animation: !reduireAnimations.matches,
+      animationDuration: 900,
+      animationEasing: 'cubicOut',
+      textStyle: { fontFamily: 'Inter, system-ui, sans-serif', color: PALETTE.texte, fontWeight: 300 },
+      aria: { enabled: false },
+      tooltip: {
+        renderMode: 'richText', confine: true, backgroundColor: 'rgba(5,5,5,0.95)', borderColor: 'rgba(255,255,255,0.18)', borderWidth: 1,
+        textStyle: { color: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif', fontSize: 13 }, padding: [8, 12]
+      }
+    };
+  }
+  function creerGraphique(noeud, option, description) {
+    if (!window.echarts || !noeud) return null;
+    noeud.setAttribute('aria-label', description);
+    if (typeof window.echarts.getInstanceByDom === 'function') { const ancien = window.echarts.getInstanceByDom(noeud); if (ancien) ancien.dispose(); }
+    const instance = window.echarts.init(noeud, null, { renderer: 'canvas' });
+    instance.setOption(Object.assign(optionsCommunes(), option));
+    let observateur = null;
+    if (typeof ResizeObserver === 'function') {
+      observateur = new ResizeObserver(function () { try { instance.resize(); } catch (e) { /* rien */ } });
+      observateur.observe(noeud);
+    }
+    graphiques.push({ instance: instance, observateur: observateur });
+    return instance;
+  }
+  function dessinerGraphiques(m) {
+    if (!window.echarts) {
+      document.querySelectorAll('[data-graphique]').forEach(function (n) { n.replaceChildren(el('p', { class: 'legende', texte: 'Graphique indisponible : la bibliothèque ECharts n’a pas pu être chargée (vérifiez la connexion Internet).' })); });
+      return;
+    }
+    document.querySelectorAll('[data-graphique]').forEach(function (n) {
+      const type = n.getAttribute('data-graphique');
+      try {
+        if (type === 'cascade') graphCascade(n, m);
+        else if (type === 'sankey') graphSankey(n, m);
+        else if (type === 'entonnoir') graphEntonnoir(n, m);
+        else if (type === 'jauge') graphJauge(n, m, Number(n.getAttribute('data-index')));
+        else if (type === 'radar') graphRadar(n, m);
+        else if (type === 'bullet') graphBullet(n, m);
+      } catch (e) {
+        n.replaceChildren(el('p', { class: 'legende', texte: 'Ce graphique n’a pas pu être dessiné avec les données du fichier.' }));
+      }
+    });
+  }
+  function signeKMAD(v) { return (v > 0 ? '+ ' : '') + formatNombre(v, 1); }
+  function couperLibelle(t, max) {
+    const mots = String(t).split(' ');
+    const lignes = [''];
+    for (const mot of mots) {
+      if ((lignes[lignes.length - 1] + ' ' + mot).trim().length > max) lignes.push(mot);
+      else lignes[lignes.length - 1] = (lignes[lignes.length - 1] + ' ' + mot).trim();
+    }
+    return lignes.join('\n');
+  }
+  const POLICE_CHIFFRES = '400 13px Cinzel, Georgia, serif';
+
+  /* Cascade : trésorerie 2026 → + opérationnel → − investissement → + financement → trésorerie 2027 */
+  function graphCascade(n, m) {
+    const rows = m.graphiques.cascade;
+    const dernier = rows.length - 1;
+    const donnees = rows.map(function (r, i) {
+      const debut = (r.debut || 0) / 1000, fin = (r.fin || 0) / 1000;
+      const total = (i === 0 || i === dernier) && (r.debut || 0) === 0;
+      return { value: [i, debut, fin], nature: total ? 'total' : (fin >= debut ? 'entree' : 'sortie'), libelle: r.libelle };
+    });
+    const couleur = { total: PALETTE.blanc, entree: PALETTE.or, sortie: PALETTE.grenat };
+    creerGraphique(n, {
+      grid: { left: 8, right: 8, top: 36, bottom: 8, containLabel: true },
+      xAxis: { type: 'category', data: rows.map(function (r) { return couperLibelle(r.libelle, 14); }), axisLine: { lineStyle: { color: PALETTE.axe } }, axisTick: { show: false }, axisLabel: { color: PALETTE.texte, fontSize: 12, interval: 0, lineHeight: 15 } },
+      yAxis: { type: 'value', axisLabel: { color: PALETTE.texteDoux, formatter: function (v) { return formatNombre(v, 0); } }, splitLine: { lineStyle: { color: PALETTE.grille } } },
+      tooltip: Object.assign(optionsCommunes().tooltip, { trigger: 'item', formatter: function (p) { const d = donnees[p.dataIndex]; const delta = d.value[2] - d.value[1]; return d.libelle + '\n' + (d.nature === 'total' ? formatNombre(d.value[2], 1) : signeKMAD(delta)) + ' k MAD'; } }),
+      series: [{
+        type: 'custom',
+        encode: { x: 0, y: [1, 2] },
+        data: donnees,
+        renderItem: function (params, api) {
+          const i = api.value(0), debut = api.value(1), fin = api.value(2);
+          const p1 = api.coord([i, debut]), p2 = api.coord([i, fin]);
+          const largeur = api.size([1, 0])[0] * 0.56;
+          const haut = Math.min(p1[1], p2[1]), bas = Math.max(p1[1], p2[1]);
+          const d = donnees[params.dataIndex];
+          const montant = d.nature === 'total' ? formatNombre(fin, 1) : signeKMAD(fin - debut);
+          const enDessous = Math.max(debut, fin) <= 0;
+          return { type: 'group', children: [
+            { type: 'rect', shape: { x: p1[0] - largeur / 2, y: haut, width: largeur, height: Math.max(2, bas - haut), r: 3 }, style: { fill: couleur[d.nature] } },
+            { type: 'text', style: { text: montant, x: p1[0], y: enDessous ? bas + 6 : haut - 6, fill: d.nature === 'sortie' ? '#FF8A9B' : (d.nature === 'total' ? '#FFFFFF' : PALETTE.or), font: POLICE_CHIFFRES, align: 'center', verticalAlign: enDessous ? 'top' : 'bottom' } }
+          ] };
+        }
+      }]
+    }, 'Cascade de la trésorerie : ' + rows.map(function (r, i) { return r.libelle + ' ' + (donnees[i].nature === 'total' ? formatKMAD(r.fin) : signeKMAD(((r.fin || 0) - (r.debut || 0)) / 1000)) + ' k MAD'; }).join(' ; '));
+  }
+
+  /* Sankey : d'où vient l'argent et où il va (onglet TFT) */
+  function graphSankey(n, m) {
+    const v = function (code) { return valeurTFT(m, code, 2027) || 0; };
+    const sources = [], emplois = [];
+    const ajouter = function (nom, montant) { if (montant > 0) sources.push({ nom: nom, montant: montant }); else if (montant < 0) emplois.push({ nom: nom, montant: -montant }); };
+    ajouter('Flux opérationnel', v('OT'));
+    ajouter('Emprunts reçus', v('F1'));
+    ajouter('Investissements', v('IT'));
+    ajouter('Remboursements d’emprunts', v('F2'));
+    ajouter('Intérêts', v('F3'));
+    ajouter('Loyers IFRS 16', v('F4') + v('F5'));
+    ajouter('Dividendes', v('F6'));
+    const variation = m.flux.V.v27 || 0;
+    if (variation < 0) sources.push({ nom: 'Baisse de la trésorerie', montant: -variation });
+    else if (variation > 0) emplois.push({ nom: 'Hausse de la trésorerie', montant: variation });
+    const centre = 'Cash mobilisé en 2027';
+    const totalCentre = sources.reduce(function (s, x) { return s + x.montant; }, 0);
+    const montants = new Map();
+    const noeuds = [{ name: centre, itemStyle: { color: PALETTE.blanc }, label: { position: 'top', color: '#FFFFFF' } }];
+    montants.set(centre, totalCentre);
+    sources.forEach(function (s) { noeuds.push({ name: s.nom, itemStyle: { color: PALETTE.or }, label: { position: 'right' } }); montants.set(s.nom, s.montant); });
+    emplois.forEach(function (s) { noeuds.push({ name: s.nom, itemStyle: { color: PALETTE.grenat }, label: { position: 'left' } }); montants.set(s.nom, s.montant); });
+    const liens = sources.map(function (s) { return { source: s.nom, target: centre, value: s.montant / 1000 }; })
+      .concat(emplois.map(function (s) { return { source: centre, target: s.nom, value: s.montant / 1000 }; }));
+    const etroit = n.clientWidth < 600;
+    creerGraphique(n, {
+      tooltip: Object.assign(optionsCommunes().tooltip, { trigger: 'item', formatter: function (p) {
+        if (p.dataType === 'edge') return p.data.source + ' → ' + p.data.target + '\n' + formatNombre(p.data.value, 1) + ' k MAD';
+        return p.name + '\n' + formatNombre((montants.get(p.name) || 0) / 1000, 1) + ' k MAD';
+      } }),
+      series: [{
+        type: 'sankey', left: etroit ? 4 : 16, right: etroit ? 4 : 16, top: 32, bottom: 12,
+        nodeWidth: 14, nodeGap: etroit ? 10 : 16, nodeAlign: 'justify', draggable: false, layoutIterations: 0,
+        emphasis: { focus: 'adjacency' },
+        data: noeuds, links: liens,
+        lineStyle: { color: 'gradient', opacity: 0.35, curveness: 0.5 },
+        label: { color: '#FFFFFF', fontFamily: 'Inter, system-ui, sans-serif', fontSize: etroit ? 10 : 12, lineHeight: etroit ? 13 : 16,
+          formatter: function (p) { return (etroit ? couperLibelle(p.name, 14) : p.name) + '\n' + formatNombre((montants.get(p.name) || 0) / 1000, 1) + ' k MAD'; } }
+      }]
+    }, 'Sankey des flux 2027. Entrées : ' + sources.map(function (s) { return s.nom + ' ' + formatKMAD(s.montant) + ' k MAD'; }).join(', ') + '. Sorties : ' + emplois.map(function (s) { return s.nom + ' ' + formatKMAD(s.montant) + ' k MAD'; }).join(', ') + '.');
+  }
+
+  /* Entonnoir : EBITDA → flux opérationnel → après loyers → après service des emprunts */
+  function graphEntonnoir(n, m) {
+    const rows = m.graphiques.entonnoir;
+    const max = Math.max.apply(null, rows.map(function (r) { return Math.max(0, r.valeur || 0); }).concat([1]));
+    const donnees = rows.map(function (r, i) {
+      return { name: r.libelle, value: Math.max(0, (r.valeur || 0) / 1000), vrai: (r.valeur || 0) / 1000, itemStyle: { color: i === 0 ? PALETTE.or : 'rgba(255,255,255,' + (0.92 - i * 0.12) + ')' } };
+    });
+    creerGraphique(n, {
+      tooltip: Object.assign(optionsCommunes().tooltip, { trigger: 'item', formatter: function (p) { return p.name + '\n' + formatNombre(p.data.vrai, 1) + ' k MAD'; } }),
+      series: [{
+        type: 'funnel', sort: 'none', left: '6%', right: '6%', top: 12, bottom: 12, min: 0, max: max / 1000, minSize: '24%', maxSize: '100%', gap: 4,
+        label: { show: true, position: 'inside', color: '#000000', fontFamily: 'Inter, system-ui, sans-serif', fontSize: 13, fontWeight: 400, formatter: function (p) { return p.name + '\n' + formatNombre(p.data.vrai, 1) + ' k MAD'; } },
+        itemStyle: { borderColor: '#000', borderWidth: 1 },
+        data: donnees
+      }]
+    }, 'Entonnoir 2027 : ' + rows.map(function (r) { return r.libelle + ' ' + formatKMAD(r.valeur) + ' k MAD'; }).join(' → '));
+  }
+
+  /* Jauges : valeur face à la cible, au plafond ou au seuil (paramètres du fichier) */
+  function graphJauge(n, m, index) {
+    const j = m.graphiques.jauges[index];
+    if (!j) return;
+    const p = m.params;
+    const cles = [['PARAM_CIBLE_CONV', 'PARAM_MAX_CONV', 'ratio'], ['PARAM_PLAFOND', 'PARAM_MAX_LEV', 'fois'], ['PARAM_CIBLE_DSCR', 'PARAM_MAX_DSCR', 'fois']][index] || [null, null, 'ratio'];
+    const repere = estNombre(p[cles[0]]) ? p[cles[0]] : lireNombreTexte(String(j.repere || '').replace(/^[^\d−-]+/, ''));
+    const maximum = estNombre(p[cles[1]]) ? p[cles[1]] : (j.maximum || 1);
+    const valeur = j.valeur || 0;
+    const motRepere = (String(j.repere || '').split(' ')[0] || 'repère');
+    const unite = cles[2];
+    const geometrie = { type: 'gauge', min: 0, max: maximum, startAngle: 210, endAngle: -30, radius: '88%', center: ['50%', '58%'] };
+    creerGraphique(n, {
+      series: [
+        Object.assign({}, geometrie, {
+          progress: { show: true, width: 12, roundCap: true, itemStyle: { color: PALETTE.or } },
+          axisLine: { roundCap: true, lineStyle: { width: 12, color: [[1, 'rgba(255,255,255,0.08)']] } },
+          axisTick: { show: false }, splitLine: { show: false },
+          axisLabel: { show: false }, pointer: { show: false }, anchor: { show: false },
+          title: { show: true, offsetCenter: [0, '42%'], color: PALETTE.texteDoux, fontSize: 12, fontFamily: 'Inter, system-ui, sans-serif' },
+          detail: { valueAnimation: !reduireAnimations.matches, offsetCenter: [0, '2%'], color: '#FFFFFF', fontFamily: 'Cinzel, Georgia, serif', fontSize: 30, formatter: function () { return formatValeur(valeur, unite); } },
+          data: [{ value: Math.max(0, Math.min(valeur, maximum)), name: motRepere + ' ' + formatValeur(repere, unite) }]
+        }),
+        Object.assign({}, geometrie, {
+          z: 5, progress: { show: false }, axisLine: { show: false }, axisTick: { show: false }, splitLine: { show: false }, axisLabel: { show: false },
+          pointer: { show: true, icon: 'rect', width: 3, length: '14%', offsetCenter: [0, '-80%'], itemStyle: { color: '#FFFFFF' } },
+          anchor: { show: false }, title: { show: false }, detail: { show: false },
+          data: [{ value: Math.max(0, Math.min(repere || 0, maximum)) }]
+        })
+      ]
+    }, j.libelle + ' : ' + formatValeur(valeur, unite) + ', ' + motRepere + ' ' + formatValeur(repere, unite) + ', maximum de la jauge ' + formatValeur(maximum, unite));
+  }
+
+  /* Radar : 6 axes, score 2027 face à 2026, avec la cible (score 100 = cible atteinte) */
+  function graphRadar(n, m) {
+    const rows = m.graphiques.radar;
+    const etroit = n.clientWidth < 520;
+    creerGraphique(n, {
+      legend: { bottom: 0, textStyle: { color: PALETTE.texte, fontSize: 12 }, data: ['2027', '2026', 'Cible'], icon: 'roundRect' },
+      tooltip: Object.assign(optionsCommunes().tooltip, { trigger: 'item', formatter: function (p) {
+        const cle = p.name === '2027' ? 's27' : (p.name === '2026' ? 's26' : null);
+        return p.name + '\n' + rows.map(function (r) {
+          if (!cle) return r.libelle + ' : cible ' + formatNombre(r.cible, 2);
+          const val = cle === 's27' ? r.v27 : r.v26;
+          return r.libelle + ' : score ' + formatNombre(r[cle], 0) + ' (valeur ' + formatNombre(val, 2) + ')';
+        }).join('\n');
+      } }),
+      radar: {
+        center: ['50%', '50%'], radius: etroit ? '58%' : '68%', splitNumber: 4,
+        indicator: rows.map(function (r) { return { name: etroit ? couperLibelle(r.libelle, 12) : r.libelle, min: 0, max: 100 }; }),
+        axisName: { color: PALETTE.texte, fontSize: etroit ? 11 : 13, fontFamily: 'Inter, system-ui, sans-serif' },
+        splitLine: { lineStyle: { color: 'rgba(255,255,255,0.10)' } }, splitArea: { show: false }, axisLine: { lineStyle: { color: 'rgba(255,255,255,0.12)' } }
+      },
+      series: [{
+        type: 'radar', symbol: 'circle', symbolSize: 5,
+        data: [
+          { name: 'Cible', value: rows.map(function () { return 100; }), lineStyle: { color: 'rgba(255,255,255,0.45)', type: 'dashed', width: 1 }, itemStyle: { color: 'rgba(255,255,255,0.45)' }, symbol: 'none' },
+          { name: '2026', value: rows.map(function (r) { return Math.max(0, Math.min(100, r.s26 || 0)); }), lineStyle: { color: '#FFFFFF', width: 1.25 }, itemStyle: { color: '#FFFFFF' } },
+          { name: '2027', value: rows.map(function (r) { return Math.max(0, Math.min(100, r.s27 || 0)); }), lineStyle: { color: PALETTE.or, width: 2 }, itemStyle: { color: PALETTE.or }, areaStyle: { color: 'rgba(224,174,40,0.16)' },
+            label: { show: true, color: PALETTE.or, fontFamily: 'Cinzel, Georgia, serif', fontSize: 11, formatter: function (p) { return formatNombre(p.value, 0); } } }
+        ]
+      }]
+    }, 'Radar des scores 2027 et 2026 : ' + rows.map(function (r) { return r.libelle + ' ' + formatNombre(r.s27, 0) + ' en 2027, ' + formatNombre(r.s26, 0) + ' en 2026'; }).join(' ; ') + '. La cible vaut 100.');
+  }
+
+  /* Bullet chart : délais clients, stocks et fournisseurs face à leur seuil vert */
+  function graphBullet(n, m) {
+    const correspondance = { CLIENTS: 'K06', STOCKS: 'K07', FOURNISSEURS: 'K08' };
+    const rows = m.bfr.map(function (r) {
+      const code = correspondance[normaliser(r.poste)] || '';
+      const k = code ? kpiParCode(m, code) : null;
+      const seuil = k && k.seuil ? k.seuil : { sens: 'bas', vert: r.seuilVert, ambre: null };
+      return { libelle: k ? k.nomCourt : r.poste, valeur: r.valeur || 0, vert: estNombre(r.seuilVert) ? r.seuilVert : seuil.vert, ambre: seuil.ambre, sens: seuil.sens };
+    });
+    const max = Math.ceil(Math.max.apply(null, rows.map(function (r) { return Math.max(r.valeur, r.vert || 0, r.ambre || 0); }).concat([10])) * 1.18 / 10) * 10;
+    const donnees = rows.map(function (r, i) { return { value: [i, r.valeur, r.vert, r.ambre, r.sens === 'haut' ? 1 : 0] }; });
+    creerGraphique(n, {
+      grid: { left: 8, right: 32, top: 12, bottom: 8, containLabel: true },
+      xAxis: { type: 'value', min: 0, max: max, axisLabel: { color: PALETTE.texteDoux, formatter: function (v) { return formatNombre(v, 0) + ' j'; } }, splitLine: { lineStyle: { color: PALETTE.grille } } },
+      yAxis: { type: 'category', inverse: true, data: rows.map(function (r) { return couperLibelle(r.libelle, 16); }), axisLabel: { color: PALETTE.texte, fontSize: 13, lineHeight: 16 }, axisLine: { lineStyle: { color: PALETTE.axe } }, axisTick: { show: false } },
+      tooltip: Object.assign(optionsCommunes().tooltip, { trigger: 'item', formatter: function (p) { const r = rows[p.dataIndex]; return r.libelle + '\n2027 : ' + formatNombre(r.valeur, 1) + ' j\nSeuil vert : ' + formatNombre(r.vert, 0) + ' j' + (estNombre(r.ambre) ? '\nSeuil orange : ' + formatNombre(r.ambre, 0) + ' j' : ''); } }),
+      series: [{
+        type: 'custom', encode: { x: [1, 2], y: 0 }, data: donnees,
+        renderItem: function (params, api) {
+          const i = api.value(0), valeur = api.value(1), vert = api.value(2), ambre = api.value(3), haut = api.value(4) === 1;
+          const hauteur = api.size([0, 1])[1];
+          const yc = api.coord([0, i])[1];
+          const x = function (v) { return api.coord([v, i])[0]; };
+          const bande = hauteur * 0.5, barre = hauteur * 0.16;
+          const zones = [];
+          const ajouterZone = function (a, b, op) { if (!(b > a)) return; zones.push({ type: 'rect', shape: { x: x(a), y: yc - bande / 2, width: x(b) - x(a), height: bande }, style: { fill: 'rgba(255,255,255,' + op + ')' } }); };
+          const am = Number.isFinite(ambre) ? ambre : vert;
+          if (haut) { ajouterZone(0, am, 0.03); ajouterZone(am, vert, 0.07); ajouterZone(vert, max, 0.13); }
+          else { ajouterZone(0, vert, 0.13); ajouterZone(vert, am, 0.07); ajouterZone(am, max, 0.03); }
+          return { type: 'group', children: zones.concat([
+            { type: 'rect', shape: { x: x(0), y: yc - barre / 2, width: Math.max(2, x(valeur) - x(0)), height: barre, r: 2 }, style: { fill: PALETTE.or } },
+            { type: 'rect', shape: { x: x(vert) - 1.5, y: yc - bande / 2 - 4, width: 3, height: bande + 8 }, style: { fill: '#FFFFFF' } },
+            { type: 'text', style: { text: formatNombre(valeur, 1) + ' j', x: x(valeur) + 8, y: yc, fill: '#FFFFFF', font: POLICE_CHIFFRES, align: 'left', verticalAlign: 'middle' } },
+            { type: 'text', style: { text: 'seuil vert ' + formatNombre(vert, 0) + ' j', x: x(vert), y: yc + bande / 2 + 6, fill: PALETTE.texteDoux, font: '300 11px Inter, system-ui, sans-serif', align: 'center', verticalAlign: 'top' } }
+          ]) };
+        }
+      }]
+    }, 'Bullet chart des délais 2027 : ' + rows.map(function (r) { return r.libelle + ' ' + formatNombre(r.valeur, 1) + ' jours pour un seuil vert de ' + formatNombre(r.vert, 0); }).join(' ; '));
+  }
+
+  /* =======================================================================
+     8. FOND ANIMÉ · particules noires brillantes reliées (coupé si besoin)
+     ======================================================================= */
+  const fond = { actif: false, particules: [], ctx: null, largeur: 0, hauteur: 0, demande: 0 };
+  function demarrerFond() {
+    const canvas = document.getElementById('particules');
+    const doitTourner = !reduireAnimations.matches && !window.matchMedia('(max-width: 767px)').matches;
+    if (!doitTourner) { fond.actif = false; cancelAnimationFrame(fond.demande); if (canvas.getContext) { const c = canvas.getContext('2d'); if (c) c.clearRect(0, 0, canvas.width, canvas.height); } return; }
+    if (fond.actif) return;
+    fond.actif = true;
+    fond.ctx = canvas.getContext('2d');
+    const dimension = function () {
+      const r = Math.min(window.devicePixelRatio || 1, 2);
+      fond.largeur = window.innerWidth; fond.hauteur = window.innerHeight;
+      canvas.width = fond.largeur * r; canvas.height = fond.hauteur * r;
+      fond.ctx.setTransform(r, 0, 0, r, 0, 0);
+    };
+    dimension();
+    window.addEventListener('resize', dimension);
+    const nombre = Math.round(Math.min(56, fond.largeur * fond.hauteur / 26000));
+    fond.particules = [];
+    for (let i = 0; i < nombre; i++) {
+      fond.particules.push({ x: Math.random() * fond.largeur, y: Math.random() * fond.hauteur, vx: (Math.random() - 0.5) * 0.12, vy: (Math.random() - 0.5) * 0.12, r: 1.6 + Math.random() * 3.2 });
+    }
+    const image = function () {
+      if (!fond.actif) return;
+      if (!document.hidden) {
+        const c = fond.ctx;
+        c.clearRect(0, 0, fond.largeur, fond.hauteur);
+        const ps = fond.particules;
+        for (const p of ps) {
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < -10) p.x = fond.largeur + 10; if (p.x > fond.largeur + 10) p.x = -10;
+          if (p.y < -10) p.y = fond.hauteur + 10; if (p.y > fond.hauteur + 10) p.y = -10;
+        }
+        c.lineWidth = 0.6;
+        for (let i = 0; i < ps.length; i++) {
+          for (let j = i + 1; j < ps.length; j++) {
+            const dx = ps[i].x - ps[j].x, dy = ps[i].y - ps[j].y, d2 = dx * dx + dy * dy;
+            if (d2 < 26000) { c.strokeStyle = 'rgba(255,255,255,' + (0.05 * (1 - d2 / 26000)).toFixed(3) + ')'; c.beginPath(); c.moveTo(ps[i].x, ps[i].y); c.lineTo(ps[j].x, ps[j].y); c.stroke(); }
+          }
+        }
+        for (const p of ps) {
+          const g = c.createRadialGradient(p.x - p.r * 0.35, p.y - p.r * 0.35, 0, p.x, p.y, p.r);
+          g.addColorStop(0, 'rgba(255,255,255,0.55)');
+          g.addColorStop(0.25, 'rgba(60,60,60,0.9)');
+          g.addColorStop(1, 'rgba(0,0,0,0.95)');
+          c.fillStyle = g;
+          c.beginPath(); c.arc(p.x, p.y, p.r, 0, Math.PI * 2); c.fill();
+        }
+      }
+      fond.demande = requestAnimationFrame(image);
+    };
+    fond.demande = requestAnimationFrame(image);
+  }
+
+  /* =======================================================================
+     9. DÉMARRAGE
+     ======================================================================= */
+  function brancherEvenements() {
+    window.addEventListener('hashchange', function () { fermerVolet(); rendre(); });
+    document.addEventListener('visibilitychange', function () {
+      if (!document.hidden && etat.syncActive && (etat.mode === 'A' || etat.mode === 'B')) { etat.derniereVerif = 0; verifierMaintenant(); }
+    });
+    document.getElementById('choix-fichier').addEventListener('change', function (e) {
+      const f = e.target.files && e.target.files[0];
+      if (f) importerFichier(f);
+    });
+    document.getElementById('volet-fond').addEventListener('click', fermerVolet);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') fermerVolet(); });
+    /* Glisser-déposer : connexion en direct si le navigateur le permet */
+    const voile = document.getElementById('voile-depot');
+    let profondeur = 0;
+    document.addEventListener('dragenter', function (e) { if (!e.dataTransfer || Array.from(e.dataTransfer.types || []).indexOf('Files') < 0) return; e.preventDefault(); profondeur++; voile.classList.add('actif'); });
+    document.addEventListener('dragleave', function () { profondeur = Math.max(0, profondeur - 1); if (!profondeur) voile.classList.remove('actif'); });
+    document.addEventListener('dragover', function (e) { e.preventDefault(); });
+    document.addEventListener('drop', async function (e) {
+      e.preventDefault();
+      profondeur = 0; voile.classList.remove('actif');
+      const dt = e.dataTransfer;
+      if (!dt) return;
+      const item = dt.items && dt.items[0];
+      const promessePoignee = item && item.kind === 'file' && typeof item.getAsFileSystemHandle === 'function' ? item.getAsFileSystemHandle() : null;
+      const fichier = dt.files && dt.files[0];
+      if (promessePoignee) {
+        try {
+          const poignee = await promessePoignee;
+          if (poignee && poignee.kind === 'file') { await brancherPoignee(poignee); return; }
+        } catch (err) { /* repli : import simple */ }
+      }
+      if (fichier) importerFichier(fichier);
+    });
+    const relancerFond = function () { fond.actif = false; cancelAnimationFrame(fond.demande); demarrerFond(); if (etat.modele) rendre({ conserverDefilement: true }); };
+    if (reduireAnimations.addEventListener) reduireAnimations.addEventListener('change', relancerFond);
+    if (ecranMobile.addEventListener) ecranMobile.addEventListener('change', function () { fermerVolet(); if (etat.modele) rendre({ conserverDefilement: true }); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { if (etat.modele && !donneesBloquees()) { const jeton = ++jetonRendu; requestAnimationFrame(function () { if (jeton === jetonRendu) { detruireGraphiques(); dessinerGraphiques(etat.modele); } }); } });
+  }
+
+  async function demarrer() {
+    if (estDansUnCadre()) {
+      /* Ouverte à l'intérieur d'un autre site : le contenu reste masqué. */
+      document.body.replaceChildren(el('p', { style: 'padding:24px;color:#E0AE28;font-family:sans-serif', texte: 'Cette application ne peut pas être affichée à l’intérieur d’un autre site. Ouvrez-la directement.' }));
+      document.documentElement.classList.remove('anti-cadre');
+      return;
+    }
+    document.documentElement.classList.remove('anti-cadre');
+    etat.syncActive = lirePreferenceSync();
+    brancherEvenements();
+    demarrerFond();
+    afficherSync();
+    rendre();
+    setInterval(battement, 1000);
+
+    /* 1) Reconnecter le fichier déjà connecté (mode A) */
+    if (API_DIRECTE) {
+      const poignee = await idb('lire');
+      if (poignee && typeof poignee.getFile === 'function') {
+        etat.fichierNom = poignee.name || '';
+        let perm = 'prompt';
+        try { perm = typeof poignee.queryPermission === 'function' ? await poignee.queryPermission({ mode: 'read' }) : 'granted'; } catch (e) { perm = 'prompt'; }
+        if (perm === 'granted') {
+          etat.poignee = poignee;
+          etat.mode = 'A';
+          etat.premiereLecture = false;
+          changerStatut('lecture');
+          await verifierMaintenant();
+          if (etat.modele) { rendre(); return; }
+          /* Fichier déplacé, renommé ou supprimé : état orange, la raison reste affichée. */
+          etat.poigneeEnAttente = poignee;
+          etat.poignee = null;
+          if (etat.statut !== 'reconnexion') changerStatut('reconnexion', 'Le fichier connecté n’a pas pu être relu.');
+        } else {
+          etat.poigneeEnAttente = poignee;
+          changerStatut('reconnexion', 'Le navigateur demande à nouveau l’autorisation de lire « ' + (poignee.name || 'votre fichier') + ' ».');
+        }
+      }
+    }
+    /* 2) Sinon, charger donnees.xlsx à côté d'index.html (mode B) */
+    if (PROTOCOLE_WEB) {
+      etat.mode = 'B';
+      etat.premiereLecture = false;
+      if (etat.statut !== 'reconnexion') changerStatut('lecture');
+      etat.occupe = true;
+      try { await verifierModeB(false); } catch (e) { signalerErreur(e); }
+      finally { etat.occupe = false; etat.derniereVerif = Date.now(); }
+      if (!etat.modele && etat.statut === 'lecture') changerStatut('aucun');
+      rendre();
+      return;
+    }
+    /* 3) Sinon, « Connecter mon fichier Excel » (mode A) ou import (mode C) */
+    etat.premiereLecture = false;
+    if (!API_DIRECTE) etat.mode = 'C';
+    if (etat.statut !== 'reconnexion') changerStatut('aucun');
+    rendre();
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', demarrer);
+  else demarrer();
+})();
+</script>
+</body>
+</html>
